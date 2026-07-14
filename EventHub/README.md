@@ -142,7 +142,7 @@ npm install
 npm run dev
 ```
 
-Open (http://localhost:3000) or (https://event-hub-flame.vercel.app/landing) in your browser.
+Open (http://localhost:3000) or ((https://my-projects-sandy-one.vercel.app/landing)) in your browser.
 
 ### Environment Variables (Optional)
 
