@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pure Glow</title>
+<link rel="icon" type="image/png" href="./Image/Logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#FAF6F1;--blush:#F2E8E0;--rose:#C9967A;--dark:#1A1210;
+  --mid:#6B4F43;--light:#E8D8CE;--white:#FFFCF9;
+  --ff-head:'Cormorant Garamond',serif;--ff-body:'Jost',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--dark);font-family:var(--ff-body);font-weight:400;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.6rem 4rem;background:var(--white);border-bottom:1px solid var(--light);position:sticky;top:0;z-index:200}
+.nav-logo{display:flex;align-items:center;gap:12px;cursor:pointer}
+.nav-logo img{width:130px;height:130px;object-fit:contain;border-radius:50%;transition:transform 0.3s ease;margin:-45px 0;position:relative;z-index:201}
+.nav-logo:hover img{transform:scale(1.08)}
+.nav-brand{font-family:var(--ff-head);font-size:1.35rem;font-weight:400;letter-spacing:0.28em;color:var(--dark)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{text-decoration:none;font-size:0.85rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);transition:color .2s;cursor:pointer}
+.nav-links a:hover{color:var(--rose)}
+
+.view-all{text-decoration:none;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--rose);border-bottom:1px solid transparent;transition:all .2s;cursor:pointer;padding-bottom:4px}
+.view-all:hover{border-color:var(--rose);opacity:.8}
+
+/* ── PAGE SYSTEM ── */
+.page{display:none}
+.page.active{display:block}
+
+/* ── HERO ── */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:90vh}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:5rem 4rem 5rem 5rem;background:var(--cream)}
+.hero-eyebrow{font-size:.7rem;letter-spacing:.38em;text-transform:uppercase;color:var(--rose);margin-bottom:1.6rem}
+.hero-title{font-family:var(--ff-head);font-size:5rem;font-weight:300;line-height:1.06;color:var(--dark);margin-bottom:1.8rem}
+.hero-title em{font-style:italic;color:var(--rose)}
+.hero-sub{font-size:1.05rem;line-height:1.9;color:var(--mid);max-width:370px;margin-bottom:2.8rem}
+.hero-btns{display:flex;gap:1.2rem;align-items:center}
+.btn-primary{background:var(--dark);color:var(--cream);padding:.9rem 2.2rem;font-size:0.85rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;border:none;font-family:var(--ff-body);transition:background .2s}
+.btn-primary:hover{background:var(--rose)}
+.btn-ghost{background:none;border:1px solid var(--mid);color:var(--mid);padding:.9rem 2.2rem;font-size:0.85rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;font-family:var(--ff-body);transition:all .2s}
+.btn-ghost:hover{border-color:var(--dark);color:var(--dark)}
+.hero-right{position:relative;overflow:hidden;background:var(--blush);display:flex;align-items:center;justify-content:center}
+.hero-right-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative;padding:3rem;min-height:90vh}
+.hero-deco-circle{position:absolute;border:1px solid rgba(201,150,122,.3);border-radius:50%}
+.hero-product-placeholder{width:55%;max-width:280px;aspect-ratio:3/4;background:rgba(201,150,122,.12);border:1.5px dashed var(--rose);border-radius:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;position:relative;z-index:2}
+.hero-product-placeholder span{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--rose);text-align:center;padding:0 1rem;line-height:1.9}
+.hero-badge{position:absolute;bottom:2.5rem;left:2.5rem;background:var(--white);padding:1.2rem 1.6rem;border-left:3px solid var(--rose);z-index:3}
+.hero-badge-num{font-family:var(--ff-head);font-size:2rem;font-weight:400;color:var(--dark);line-height:1}
+.hero-badge-txt{font-size:.68rem;letter-spacing:.12em;color:var(--mid);text-transform:uppercase;margin-top:.2rem}
+.hero-tag{position:absolute;top:2.5rem;right:2.5rem;background:var(--dark);color:var(--cream);padding:.5rem 1rem;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;z-index:3}
+
+/* ── MARQUEE ── */
+.marquee-wrap{background:var(--dark);padding:1rem 0;overflow:hidden}
+.marquee-track{display:flex;gap:3rem;animation:marquee 22s linear infinite;white-space:nowrap}
+.marquee-track span{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--light);flex-shrink:0;opacity:.7}
+.marquee-track span.dot{color:var(--rose);opacity:1}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── SECTIONS ── */
+.section{padding:5.5rem 5rem}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem}
+.section-eyebrow{font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--rose);margin-bottom:.7rem}
+.section-title{font-family:var(--ff-head);font-size:2.8rem;font-weight:300;color:var(--dark);line-height:1.1}
+
+/* ── PRODUCTS GRID ── */
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.8rem}
+#all-collection-page .products-grid{grid-template-columns:repeat(5,1fr);gap:1.2rem}
+.product-card{cursor:pointer}
+.product-img-wrap{aspect-ratio:2/3;position:relative;overflow:hidden;margin-bottom:1.2rem;background:#FFFFFF}
+.product-photo{width:100%;height:100%;object-fit:contain;transition:transform .5s ease;display:block}
+.product-card:hover .product-photo{transform:scale(1.05)}
+.product-photo.secondary{position:absolute;top:0;left:100%;z-index:1;transition:left 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);background:#fff}
+.product-card:hover .product-photo.secondary{left:0}
+.product-photo-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;transition:transform .5s ease}
+.product-card:hover .product-photo-placeholder{transform:scale(1.04)}
+.placeholder-icon{width:60px;height:90px;border:1.5px dashed rgba(201,150,122,.45);border-radius:4px;display:flex;align-items:center;justify-content:center}
+.placeholder-label{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--rose);opacity:.65;text-align:center;padding:0 1rem;line-height:1.9}
+.prod-badge{position:absolute;top:.9rem;left:.9rem;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .75rem;z-index:2}
+.badge-best{background:var(--rose);color:var(--white)}
+.badge-new{background:var(--dark);color:var(--cream)}
+.badge-sale{background:#8B5E3C;color:var(--cream)}
+.prod-view{position:absolute;bottom:0;left:0;right:0;background:var(--dark);color:var(--cream);text-align:center;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;padding:.75rem;transform:translateY(100%);transition:transform .3s ease;cursor:pointer;border:none;font-family:var(--ff-body);width:100%;z-index:2}
+.product-card:hover .prod-view{transform:translateY(0)}
+.product-name{font-family:var(--ff-head);font-size:1.35rem;font-weight:400;color:var(--dark);margin-bottom:.3rem}
+.product-sub{font-size:.75rem;color:var(--mid);line-height:1.6;margin-bottom:.4rem}
+.product-type-tag{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--rose)}
+.product-price{font-size:1.05rem;color:var(--dark);margin-top:.4rem;font-weight:400}
+.unit{text-transform:none;font-size:0.85em;margin-left:1px}
+
+/* ── ABOUT ── */
+.about-strip{background:var(--blush);padding:5rem}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.about-img-placeholder{width:100%;aspect-ratio:4/5;background:var(--cream);border:1.5px dashed rgba(201,150,122,.4);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;position:relative}
+.about-img-placeholder span{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);opacity:.65;text-align:center;padding:0 2rem;line-height:2}
+.about-accent{position:absolute;bottom:-1.5rem;right:-1.5rem;width:70%;aspect-ratio:1;border:1px solid rgba(201,150,122,.3);z-index:-1}
+.about-quote{font-family:var(--ff-head);font-size:1.9rem;font-weight:300;font-style:italic;color:var(--dark);line-height:1.4;margin:1.5rem 0 1.8rem;border-left:3px solid var(--rose);padding-left:1.5rem}
+.about-body{font-size:1.05rem;line-height:1.9;color:var(--mid);margin-bottom:2rem}
+.about-stats{display:flex;gap:3rem;margin-bottom:2.5rem}
+.stat-num{font-family:var(--ff-head);font-size:2.2rem;font-weight:400;color:var(--dark)}
+.stat-label{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+
+/* ── TESTIMONIALS ── */
+.testimonials{background:var(--cream);padding:5.5rem 5rem}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3.5rem}
+.testi-card{background:var(--white);padding:2.2rem;border-top:2px solid var(--rose)}
+.stars{color:var(--rose);font-size:.9rem;margin-bottom:1rem;letter-spacing:2px}
+.testi-text{font-family:var(--ff-head);font-size:1.1rem;font-weight:300;font-style:italic;color:var(--dark);line-height:1.65;margin-bottom:1.4rem}
+.testi-author{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.testi-avatar-placeholder{width:36px;height:36px;border-radius:50%;background:var(--blush);display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin-right:.6rem;font-family:var(--ff-head);font-size:.8rem;color:var(--rose)}
+
+/* ── BANNER ── */
+.banner{background:var(--rose);padding:4.5rem 5rem;display:flex;justify-content:space-between;align-items:center;gap:3rem}
+.banner-txt h2{font-family:var(--ff-head);font-size:2.8rem;font-weight:300;color:var(--white);line-height:1.2}
+.banner-txt h2 em{font-style:italic}
+.banner-txt p{font-size:.82rem;color:rgba(255,252,249,.75);margin-top:.7rem;letter-spacing:.05em}
+
+/* ── NEWSLETTER ── */
+.newsletter{background:var(--dark);padding:4rem 5rem;display:flex;justify-content:space-between;align-items:center;gap:3rem}
+.nl-txt h3{font-family:var(--ff-head);font-size:1.8rem;font-weight:300;color:var(--cream)}
+.nl-txt p{font-size:.8rem;color:rgba(232,216,206,.5);margin-top:.5rem}
+.nl-form{display:flex;gap:0;flex:1;max-width:420px}
+.nl-input{flex:1;padding:.85rem 1.2rem;background:rgba(255,255,255,.07);border:1px solid rgba(232,216,206,.2);color:var(--cream);font-family:var(--ff-body);font-size:.8rem;outline:none}
+.nl-input::placeholder{color:rgba(232,216,206,.3)}
+.nl-btn{background:var(--rose);color:var(--white);padding:.85rem 1.5rem;border:none;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;font-family:var(--ff-body);white-space:nowrap}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);border-top:1px solid rgba(232,216,206,.08);padding:4rem 5rem 2rem;display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:3rem}
+.foot-brand-name{font-family:var(--ff-head);font-size:1.5rem;letter-spacing:.25em;color:var(--cream);margin-bottom:.8rem}
+.foot-brand p{font-size:.88rem;color:rgba(232,216,206,.4);line-height:1.9;max-width:230px;margin-bottom:1.5rem}
+.foot-col h4{font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--rose);margin-bottom:1.4rem}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+.foot-col ul li a{text-decoration:none;font-size:.78rem;color:rgba(232,216,206,.4);transition:color .2s;cursor:pointer}
+.foot-col ul li a:hover{color:var(--cream)}
+.foot-bottom{grid-column:1/-1;border-top:1px solid rgba(232,216,206,.08);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center}
+.foot-bottom p{font-size:.68rem;color:rgba(232,216,206,.28)}
+
+/* ══════════════════════════════════════════
+   PRODUCT DETAIL PAGE
+══════════════════════════════════════════ */
+.detail-page{display:none;min-height:100vh}
+.detail-page.active{display:block}
+
+.back-bar{padding:1.2rem 5rem;background:var(--white);border-bottom:1px solid var(--light);display:flex;align-items:center;gap:.8rem;cursor:pointer;user-select:none}
+.back-btn{background:none;border:none;font-family:var(--ff-body);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);pointer-events:none;display:flex;align-items:center;gap:.5rem;transition:color .2s}
+.back-btn:hover{color:var(--rose)}
+.back-arrow{font-size:1rem}
+
+.detail-hero{display:grid;grid-template-columns:1fr 1fr;min-height:80vh}
+.detail-gallery{background:#FFFFFF;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:4rem}
+.detail-main-img{width:70%;max-width:360px;aspect-ratio:2/3;object-fit:cover;display:block;order:1}
+.detail-main-placeholder{width:65%;max-width:340px;aspect-ratio:2/3;background:rgba(201,150,122,.1);border:1.5px dashed var(--rose);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem}
+.detail-main-placeholder span{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--rose);text-align:center;padding:0 1.5rem;line-height:2}
+.detail-thumbs{display:flex;gap:.7rem;margin-top:2rem;order:2}
+.detail-thumb{width:52px;height:68px;background:rgba(201,150,122,.15);border:1px solid rgba(201,150,122,.3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.5rem;color:var(--rose);text-align:center;line-height:1.4;letter-spacing:.1em;text-transform:uppercase;padding:.2rem;transition:border-color .2s}
+.detail-thumb:hover,.detail-thumb.active{border-color:var(--rose);background:rgba(201,150,122,.25)}
+.detail-thumb img{width:100%;height:100%;object-fit:cover}
+
+.detail-info{padding:4rem 5rem;display:flex;flex-direction:column;justify-content:center;background:var(--cream)}
+.detail-eyebrow{font-size:.65rem;letter-spacing:.32em;text-transform:uppercase;color:var(--rose);margin-bottom:1rem}
+.detail-title{font-family:var(--ff-head);font-size:3.2rem;font-weight:300;color:var(--dark);line-height:1.1;margin-bottom:.6rem}
+.detail-subtitle{font-size:1rem;color:var(--mid);margin-bottom:1.8rem;letter-spacing:.05em}
+.detail-stars{color:var(--rose);font-size:.95rem;letter-spacing:2px;margin-bottom:.3rem}
+.detail-price{font-size:1.35rem;color:var(--rose);margin-bottom:1.2rem;font-family:var(--ff-body)}
+.detail-reviews{font-size:0.85rem;color:var(--mid);margin-bottom:2rem;letter-spacing:.05em}
+.detail-desc{font-size:1.1rem;line-height:1.95;color:var(--mid);margin-bottom:2.5rem;max-width:440px}
+
+.detail-instructions-section{margin-bottom:2.5rem;display:none} /* Hidden by default */
+.detail-instructions-section h4{font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--dark);margin-bottom:1rem}
+.instructions-list{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+.instructions-list li{font-size:.82rem;color:var(--mid);line-height:1.6}
+.detail-ingredients-section{border-top:1px solid var(--light);padding-top:2rem;margin-bottom:2rem}
+.detail-ingredients-section h4{font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--dark);margin-bottom:.8rem}
+.detail-ingredients-section p{font-size:.78rem;color:var(--mid);line-height:1.8}
+
+.detail-contact-note{background:var(--blush);padding:1.2rem 1.5rem;border-left:3px solid var(--rose);font-size:.78rem;color:var(--mid);line-height:1.7;margin-top:.5rem}
+.detail-contact-note strong{color:var(--dark);font-weight:500}
+
+/* ── MORE PRODUCTS ── */
+.more-section{padding:5rem;background:var(--white)}
+.more-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-top:3rem}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeUp .6s ease forwards}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .products-grid{grid-template-columns:repeat(3,1fr)}
+  #all-collection-page .products-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:900px){
+  .products-grid{grid-template-columns:repeat(2,1fr)}
+  #all-collection-page .products-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:800px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .hero,.detail-hero{grid-template-columns:1fr}
+  .hero-left,.detail-info{padding:3rem 1.5rem}
+  .hero-title{font-size:3rem}
+  .hero-right .hero-right-inner{min-height:55vw}
+  .section,.about-strip,.ritual,.testimonials,.newsletter,.banner,.more-section{padding:3.5rem 1.5rem}
+  .about-inner,.ritual-steps{grid-template-columns:1fr}
+  .testi-grid,.more-grid{grid-template-columns:1fr}
+  .banner,.newsletter{flex-direction:column}
+  footer{grid-template-columns:1fr 1fr;padding:2.5rem 1.5rem 1.5rem}
+  .foot-brand{grid-column:1/-1}
+  .back-bar{padding:1rem 1.5rem}
+  .detail-gallery{padding:2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     HOME PAGE
+═══════════════════════════════════════════ -->
+<div id="home-page" class="page active">
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo" onclick="showPage('home-page')">
+      <img src="./Image/Logo.png" alt="Pure Glow logo">
+      <span class="nav-brand">PURE GLOW</span>
+    </div>
+    <ul class="nav-links">
+      <li><a onclick="scrollToSection('products')">Collection</a></li>
+      <li><a onclick="scrollToSection('about')">About</a></li>
+      <li><a onclick="scrollToSection('contact')">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Natural · Botanical · Radiant</p>
+      <h1 class="hero-title">Reveal Your<br><em>Natural</em><br>Radiance</h1>
+      <p class="hero-sub">We're your first and last Destination for German Products.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="scrollToSection('products')">Discover Collection</button>
+        <button class="btn-ghost" onclick="scrollToSection('about')">Our Story</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-right-inner">
+        <div class="hero-deco-circle" style="width:380px;height:380px;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+        <div class="hero-deco-circle" style="width:260px;height:260px;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+        <img src="./Image/Logo.png" alt="Featured Pure Glow Product" style="width:55%;max-width:280px;aspect-ratio:3/4;object-fit:cover;position:relative;z-index:2;border-radius:2px">
+        <div class="hero-badge">
+          <div class="hero-badge-num">100%</div>
+          <div class="hero-badge-txt">Made in Germany</div>
+        </div>
+        <div class="hero-tag">New Collection 2026</div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>German Product</span><span class="dot">✦</span><span>From dm Company</span><span class="dot">✦</span><span>Balea Brand</span><span class="dot">✦</span><span>Original products</span><span class="dot">✦</span>
+      <span>German Product</span><span class="dot">✦</span><span>From dm Company</span><span class="dot">✦</span><span>Balea Brand</span><span class="dot">✦</span><span>Original products</span>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section class="section" id="products">
+    <div class="section-head">
+      <div>
+        <p class="section-eyebrow">Our Collection</p>
+        <h2 class="section-title">The Edit</h2>
+      </div>
+    <a onclick="showPage('all-collection-page')" class="view-all">All Collection</a>
+    </div>
+    <div class="products-grid">
+
+      <!-- PRODUCT 1-->
+      <div class="product-card" onclick="showProduct('serum')"
+        data-gallery="./Image/1.jpeg, ./Image/111.jpeg"
+        data-price="750 EGP"
+        data-subtitle="3in1 Intensive Care Hair Mask with Vanilla & Almond Oil · 300<span class='unit'>ml</span>"
+        data-desc="A 3-in-1 intensive care hair mask (mask, conditioner, and moisturizer) for damaged, brittle, and stressed hair with vanilla and almond oil.Hair becomes softer and shinier after use. Thanks to its multiple uses, it can be used as a conditioner, mask, or leave-in cream."
+        data-ingredients="Water, Castor Seed Oil, Panthenol, Hybrid Sunflower Oil, Sweet Almond Oil."
+        data-instructions="As a conditioner: Massage into damp hair and rinse again - immediate care.;As a mask: Massage into damp hair, leave on for 3 minutes and rinse thoroughly - intensive care.;As a leave-in: Massage a small amount into towel-dried hair. Do not rinse - long-lasting care.">
+        <div class="product-img-wrap">
+          <img src="./Image/1.jpeg" alt="Hair Mask Intensive Care 3in1" class="product-photo">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Hair Mask Intensive Care 3in1</p>
+        <p class="product-type-tag">Hair Mask · 300<span class="unit">ml</span></p>
+        <p class="product-price">750 EGP</p>
+      </div>
+
+      <!-- PRODUCT 2 -->
+      <div class="product-card" onclick="showProduct('mask')"
+        data-subtitle="Perfumed Deodorant Spray · 150<span class='unit'>ml</span>"
+        data-desc="This 24-hour antiperspirant spray deodorant is aluminum-free, meaning you won't have to worry about underarm discoloration or clogged pores. Glamorous Moment perfumed deodorant from Balea combines the protection of a deodorant spray with a captivating fragrance. Its botanical formula blends floral notes with oriental touches, ensuring a long-lasting fragrance all over your body. Plus, the spray leaves no white residue and provides ideal protection against perspiration."
+        data-price="250 EGP"
+        data-ingredients="Oriental floral fragrance."
+        data-instructions="Shake the bottle well before use.;Spray under the arms from a distance of approximately 15 cm or all over the body as desired.">
+        <div class="product-img-wrap">
+          <img src="./Image/2.jpeg" alt="Glamorous Moment Perfumed Deodorant Spray, 150 ml" class="product-photo" style="object-fit: cover;">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Glamorous Moment Perfumed Deodorant Spray</p>
+        <p class="product-type-tag">Deodorant · 150<span class="unit">ml</span></p>
+        <p class="product-price">250 EGP</p>
+      </div>
+
+      <!-- PRODUCT 3 -->
+      <div class="product-card" onclick="showProduct('moisturiser')" 
+        data-gallery="./Image/3.jpeg, ./Image/33.jpeg" 
+        data-subtitle="Olive Oil Hand Cream · 100<span class='unit'>ml</span>"
+        data-price="250 EGP"
+        data-desc="Extraordinary hand care. Dermatologically tested for skin compatibility. Vegan formula. Balea Olive Oil Hand Cream transforms very dry hands into an oasis of velvety softness. Thanks to the power of high-quality olive oil and creamy olive butter, it envelops the skin, leaving it feeling incredibly supple. Enriched with panthenol, the formula soothes and deeply nourishes the skin while gently relieving tightness. This cream is more than just a treat for your hands; it's an invitation to daily pampering. A true sensory delight and essential everyday care."
+        data-ingredients="Water, Glycerin, Panthenol, Olive Fruit Oil, Parfum, Hydrogenated Olive Oil."
+        data-instructions="Gently massage daily as needed.">
+        <div class="product-img-wrap">
+          <img src="./Image/3.jpeg" alt="Olive Oil Hand Cream" class="product-photo" style="object-fit: cover;">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Olive Oil Hand Cream</p>
+        <p class="product-type-tag">Hand Cream · 100<span class="unit">ml</span></p>
+        <p class="product-price">250 EGP</p>
+      </div>
+
+      <!-- PRODUCT 4 -->
+      <div class="product-card" onclick="showProduct('toner')" 
+        data-gallery="./Image/4.jpeg, ./Image/44.jpeg" 
+        data-subtitle="Rose-flavored lip balm · 4.8<span class='unit'>g</span>"
+        data-price="200 EGP"
+        data-desc="A delicate lip balm with almond oil and shea butter. A soft tint for a natural look. Dermatologically tested for skin compatibility. Balea's &quot;Rosé&quot; lip balm pampers lips with a formula rich in almond oil, shea butter, and vitamin E. This blend leaves lips incredibly soft and with a subtle tint that gives them a natural shine."
+        data-ingredients="Castor seed oil, candelilla wax, hydrogenated coconut glycerides, hydrogenated palm oil, coconut oil, sunflower seed wax, shea butter, hydrogenated castor oil, sweet almond oil, hybrid sunflower oil, sumac husk wax, flavoring, sunflower seed oil, sweet almond flower extract, Campylobacteria galanga root extract, Pongamia piñata seed extract."
+        data-instructions="Apply a thin layer to lips.">
+        <div class="product-img-wrap">
+          <img src="./Image/4.jpeg" alt="Lip Care Rosé, 4.8 g" class="product-photo" style="object-fit: cover;">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Lip Care Rosé</p>
+        <p class="product-type-tag">Lip Care · 4.8<span class="unit">g</span></p>
+        <p class="product-price">200 EGP</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-strip" id="about">
+    <div class="about-inner">
+      <div style="position:relative">
+        <img src="./Image/OurStory.jpg" alt="Pure Glow story" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block">
+        <div class="about-accent"></div>
+      </div>
+      <div>
+        <p class="section-eyebrow">Our Story</p>
+        <h2 class="section-title" style="font-size:2.4rem">Born from a<br>Love of Nature</h2>
+        <blockquote class="about-quote">"We believe beauty is not a mask — it's the glow that comes from truly nourished skin."</blockquote>
+        <p class="about-body">Pure Glow was founded on a simple belief: your skin deserves only the purest, most potent botanicals nature has to offer. Every ingredient is carefully sourced, every formula meticulously crafted — no fillers, no compromises, just pure results.</p>
+        <div class="about-stats">
+          <div><div class="stat-num">12K+</div><div class="stat-label">Happy Customers</div></div>
+          <div><div class="stat-num">100%</div><div class="stat-label">Natural Origin</div></div>
+          <div><div class="stat-num">0</div><div class="stat-label">Harsh Chemicals</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER -->
+  <section class="banner">
+    <div class="banner-txt">
+      <h2>Pure Ingredients.<br><em>Pure Results.</em></h2>
+      <p>Cruelty-free &nbsp;·&nbsp; Vegan &nbsp;·&nbsp; Dermatologist tested &nbsp;·&nbsp; Sustainably sourced</p>
+    </div>
+    <button class="btn-primary" style="background:var(--white);color:var(--dark);white-space:nowrap" onclick="scrollToSection('products')">Explore Collection</button>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter" id="contact">
+    <div class="nl-txt">
+      <h3>Join the Glow Community</h3>
+      <p>Skincare tips, new arrivals, and exclusive updates — straight to your inbox.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="foot-brand">
+      <p class="foot-brand-name">PURE GLOW</p>
+      <p>Luxury skincare rooted in nature. Crafted for every skin type. Sustainably made with love.</p>
+    </div>
+    <div class="foot-col"><h4>Learn</h4><ul><li><a onclick="scrollToSection('about')">Our Story</a></li></div>
+    <div class="foot-col"><h4>Connect</h4><ul><li><a href="https://www.instagram.com/pure.glow66/" target="_blank" rel="noopener noreferrer">Instagram</a></li><li><a href="https://www.facebook.com/profile.php?id=61590593553863" target="_blank" rel="noopener noreferrer">Facebook</a></li></ul></div>
+    <div class="foot-bottom"><p>© 2026 Pure Glow. All rights reserved.</p><p>Privacy Policy · Terms of Service</p></div>
+  </footer>
+
+</div><!-- end home-page -->
+
+<!-- ── ALL COLLECTION PAGE ── -->
+<div id="all-collection-page" class="page">
+  <nav>
+    <div class="nav-logo" onclick="showPage('home-page')">
+      <img src="./Image/Logo.png" alt="Pure Glow logo">
+      <span class="nav-brand">PURE GLOW</span>
+    </div>
+    <ul class="nav-links">
+      <li><a onclick="showPage('home-page');scrollToSection('products')">Collection</a></li>
+      <li><a onclick="showPage('home-page');scrollToSection('about')">About</a></li>
+      <li><a onclick="showPage('home-page');scrollToSection('contact')">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="back-bar" onclick="showPage('home-page')"><button class="back-btn"><span class="back-arrow">←</span> Back to Home</button></div>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <p class="section-eyebrow">Explore Our Range</p>
+        <h2 class="section-title">All Collection</h2>
+      </div>
+    </div>
+    <div class="products-grid">
+      <!-- PRODUCT 1-->
+      <div class="product-card" onclick="showProduct('serum')"
+        data-gallery="./Image/1.jpeg, ./Image/111.jpeg"
+        data-subtitle="3in1 Intensive Care Hair Mask with Vanilla & Almond Oil · 300<span class='unit'>ml</span>"
+        data-price="750 EGP"
+        data-desc="A 3-in-1 intensive care hair mask (mask, conditioner, and moisturizer) for damaged, brittle, and stressed hair with vanilla and almond oil.Hair becomes softer and shinier after use. Thanks to its multiple uses, it can be used as a conditioner, mask, or leave-in cream."
+        data-ingredients="Water, Castor Seed Oil, Panthenol, Hybrid Sunflower Oil, Sweet Almond Oil."
+        data-instructions="As a conditioner: Massage into damp hair and rinse again - immediate care.;As a mask: Massage into damp hair, leave on for 3 minutes and rinse thoroughly - intensive care.;As a leave-in: Massage a small amount into towel-dried hair. Do not rinse - long-lasting care.">
+        <div class="product-img-wrap">
+          <img src="./Image/1.jpeg" alt="Hair Mask Intensive Care 3in1" class="product-photo">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Hair Mask Intensive Care 3in1</p>
+        <p class="product-type-tag">Hair Mask · 300<span class="unit">ml</span></p>
+        <p class="product-price">750 EGP</p>
+      </div>
+
+      <!-- PRODUCT 2-->
+      <div class="product-card" onclick="showProduct('mask')" 
+        data-gallery="./Image/5.jpeg, ./Image/55.jpeg, ./Image/555.jpeg" 
+        data-subtitle="Natural Beauty Repairing · 300<span class='unit'>ml</span>"
+        data-price="700 EGP"
+        data-desc="A hair mask for naturally repairing damaged and brittle hair with avocado oil and mango butter. 97% of the ingredients are of natural origin. Balea's natural hair mask is precious, gentle, and nourishing, deeply nourishing damaged and brittle hair, leaving it soft and supple without weighing it down."
+        data-ingredients="Avocado oil, mango seed butter, glycerin, shea butter."
+        data-instructions="Gently massage into wet hair, leave on for a short time, then rinse thoroughly. Suitable for daily use.;Caution: Avoid contact with eyes. In case of contact with eyes, rinse thoroughly with water.;Skin compatibility: Dermatologically tested, pH neutral.">
+        <div class="product-img-wrap">
+          <img src="./Image/5.jpeg" alt="Hair Mask Natural Beauty Repairing" class="product-photo">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Hair Mask Natural Beauty Repairing</p>
+        <p class="product-type-tag">Hair Mask · 300<span class="unit">ml</span></p>
+        <p class="product-price">700 EGP</p>
+      </div>
+
+      <!-- PRODUCT 3-->
+      <div class="product-card" onclick="showProduct('serum')" 
+        data-gallery="./Image/6.jpeg, ./Image/66.jpeg" 
+        data-subtitle="Keratin Repair · 300<span class='unit'>ml</span>"
+        data-price="550 EGP"
+        data-desc="This keratin hair mask, formulated with Lactic Acid, Glycerin, and Panthenol, is a rich treatment for brittle and damaged hair, providing renewed strength and healthy-looking hair."
+        data-ingredients="Water, Alcohol, Glycerin, Soybean Oil, Soy Protein."
+        data-instructions="Apply 1-2 ml weekly to damp hair ends.;Leave on for 2-3 minutes.;Rinse thoroughly.">
+        <div class="product-img-wrap">
+          <img src="./Image/6.jpeg" alt="Keratin Repair Hair Treatment, 300 ml" class="product-photo">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Keratin Repair Hair Treatment</p>
+        <p class="product-type-tag">Hair Treatment · 300<span class="unit">ml</span></p>
+        <p class="product-price">550 EGP</p>
+      </div>
+
+      <!-- PRODUCT 4-->
+      <div class="product-card" onclick="showProduct('serum')" 
+        data-gallery="./Image/7.jpeg, ./Image/77.jpeg" 
+        data-subtitle="Oil Repair Intensive · 300<span class='unit'>ml</span>"
+        data-price="550 EGP"
+        data-desc="This intensive hair treatment mask repairs split ends. Its rich formula, enriched with three keratin-enriched oils, is designed for severely damaged and brittle hair. It reduces breakage by up to 80%, leaving hair soft and supple."
+        data-ingredients="Water, Glycerin, Shea Butter, Urbena Oleifera Seed Oil, Argan Kernel Oil, Sclerocaria Peria Seed Oil, Wheat Protein."
+        data-instructions="Gently apply the product to damp hair ends once or twice a week.;Leave on for 2-5 minutes.;Rinse thoroughly.">
+        <div class="product-img-wrap">
+          <img src="./Image/7.jpeg" alt="Hair Treatment Oil Repair Intensive" class="product-photo">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Hair Treatment Oil Repair Intensive</p>
+        <p class="product-type-tag">Hair Treatment · 300<span class="unit">ml</span></p>
+        <p class="product-price">550 EGP</p>
+      </div>
+
+      <!-- PRODUCT 5-->
+      <div class="product-card" onclick="showProduct('toner')" 
+        data-gallery="./Image/13.jpeg, ./Image/133.jpeg" 
+        data-subtitle="Moisturizing Hair Milk with Coconut & Papaya Scent · 200<span class='unit'>ml</span>"
+        data-price="500 EGP"
+        data-desc="Balea Moisturizing Hair Milk is suitable for dry and damaged hair. It gives hair a natural shine and exceptional softness with a coconut and papaya scent."
+        data-best-for="Dry Hair;Damaged Hair"
+        data-ingredients="Water, Glycerin, Panthenol, Castor Seed Oil"
+        data-instructions="After shampooing, massage evenly into wet hair. Do not rinse.">
+        <div class="product-img-wrap">
+          <img src="./Image/13.jpeg" alt="Hair Milk Moisture, 200 ml" class="product-photo">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Hair Milk Moisture</p>
+        <p class="product-type-tag">Hair Milk · 200<span class="unit">ml</span></p>
+        <p class="product-price">500 EGP</p>
+      </div>
+
+       <!-- PRODUCT 6-->
+      <div class="product-card" onclick="showProduct('mask')"
+        data-subtitle="Perfumed Deodorant Spray · 150<span class='unit'>ml</span>"
+        data-desc="This 24-hour antiperspirant spray deodorant is aluminum-free, meaning you won't have to worry about underarm discoloration or clogged pores. Glamorous Moment perfumed deodorant from Balea combines the protection of a deodorant spray with a captivating fragrance. Its botanical formula blends floral notes with oriental touches, ensuring a long-lasting fragrance all over your body. Plus, the spray leaves no white residue and provides ideal protection against perspiration."
+        data-price="250 EGP"
+        data-ingredients="Oriental floral fragrance."
+        data-instructions="Shake the bottle well before use.;Spray under the arms from a distance of approximately 15 cm or all over the body as desired.">
+        <div class="product-img-wrap">
+          <img src="./Image/2.jpeg" alt="Glamorous Moment Perfumed Deodorant Spray, 150 ml" class="product-photo" style="object-fit: cover;">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Glamorous Moment Perfumed Deodorant Spray</p>
+        <p class="product-type-tag">Deodorant · 150<span class="unit">ml</span></p>
+        <p class="product-price">250 EGP</p>
+      </div>
+
+       <!-- PRODUCT 7-->
+      <div class="product-card" onclick="showProduct('mask')"
+        data-subtitle="Perfume Spray Deodorant · 150<span class='unit'>ml</span>"
+        data-desc="A perfumed spray deodorant with a &quot;magical moment&quot; fragrance. 24-hour antiperspirant protection. Zero aluminum, meaning no worries about underarm discoloration or clogged pores. Long-lasting fragrance."
+        data-price="250 EGP"
+        data-ingredients="Elegant floral fragrance, wild rose, powdery jasmine."
+        data-instructions="Spray under the arms from a distance of approximately 15 cm or all over the body as desired.">
+        <div class="product-img-wrap">
+          <img src="./Image/8.jpeg" alt="Pure Elegance Perfume Spray Deodorant, 150 ml" class="product-photo" style="object-fit: cover;">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Pure Elegance Perfume Spray Deodorant</p>
+        <p class="product-type-tag">Deodorant · 150<span class="unit">ml</span></p>
+        <p class="product-price">250 EGP</p>
+      </div>
+
+       <!-- PRODUCT 8-->
+      <div class="product-card" onclick="showProduct('moisturiser')" 
+        data-gallery="./Image/3.jpeg, ./Image/33.jpeg" 
+        data-subtitle="Olive Oil Hand Cream · 100<span class='unit'>ml</span>"
+        data-price="250 EGP"
+        data-desc="Extraordinary hand care. Dermatologically tested for skin compatibility. Vegan formula. Balea Olive Oil Hand Cream transforms very dry hands into an oasis of velvety softness. Thanks to the power of high-quality olive oil and creamy olive butter, it envelops the skin, leaving it feeling incredibly supple. Enriched with panthenol, the formula soothes and deeply nourishes the skin while gently relieving tightness. This cream is more than just a treat for your hands; it's an invitation to daily pampering. A true sensory delight and essential everyday care."
+        data-ingredients="Water, Glycerin, Panthenol, Olive Fruit Oil, Parfum, Hydrogenated Olive Oil."
+        data-instructions="Gently massage daily as needed.">
+        <div class="product-img-wrap">
+          <img src="./Image/3.jpeg" alt="Olive Oil Hand Cream" class="product-photo" style="object-fit: cover;">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Olive Oil Hand Cream</p>
+        <p class="product-type-tag">Hand Cream · 100<span class="unit">ml</span></p>
+        <p class="product-price">250 EGP</p>
+      </div>
+
+      <!-- PRODUCT 9-->
+      <div class="product-card" onclick="showProduct('moisturiser')" 
+        data-gallery="./Image/10.jpeg, ./Image/100.jpeg" 
+        data-subtitle="Moisturizing Body Cream with Shea Butter & Argan Oil · 500<span class='unit'>ml</span>"
+        data-price="650 EGP"
+        data-desc="A body cream with shea butter and argan oil suitable for dry skin. Moisturizes for up to 48 hours. Nourishes and softens skin. The nourishing formula improves skin elasticity. Suitable for all skin types (Normal, Dry, Very Dry, Sensitive)."
+        data-ingredients="Water, Glycerin, Shea Butter, Argan Kernel Oil"
+        data-instructions="Gently massage daily as needed.">
+        <div class="product-img-wrap">
+          <img src="./Image/10.jpeg" alt="Body Cream Shea Butter & Argan Oil, 500 ml" class="product-photo">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Body Cream Shea Butter & Argan Oil</p>
+        <p class="product-type-tag">Body Cream · 500<span class="unit">ml</span></p>
+        <p class="product-price">650 EGP</p>
+      </div>
+
+      <!-- PRODUCT 10-->
+      <div class="product-card" onclick="showProduct('toner')" 
+        data-gallery="./Image/4.jpeg, ./Image/44.jpeg" 
+        data-subtitle="Rose-flavored lip balm · 4.8<span class='unit'>g</span>"
+        data-price="200 EGP"
+        data-desc="A delicate lip balm with almond oil and shea butter. A soft tint for a natural look. Dermatologically tested for skin compatibility. Balea's &quot;Rosé&quot; lip balm pampers lips with a formula rich in almond oil, shea butter, and vitamin E. This blend leaves lips incredibly soft and with a subtle tint that gives them a natural shine."
+        data-ingredients="Castor seed oil, candelilla wax, hydrogenated coconut glycerides, hydrogenated palm oil, coconut oil, sunflower seed wax, shea butter, hydrogenated castor oil, sweet almond oil, hybrid sunflower oil, sumac husk wax, flavoring, sunflower seed oil, sweet almond flower extract, Campylobacteria galanga root extract, Pongamia piñata seed extract."
+        data-instructions="Apply a thin layer to lips.">
+        <div class="product-img-wrap">
+          <img src="./Image/4.jpeg" alt="Lip Care Rosé" class="product-photo" style="object-fit: cover;">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Lip Care Rosé</p>
+        <p class="product-type-tag">Lip Care · 4.8<span class="unit">g</span></p>
+        <p class="product-price">200 EGP</p>
+      </div>
+      
+      <!-- PRODUCT 11-->
+      <div class="product-card" onclick="showProduct('toner')" 
+        data-gallery="./Image/9.jpeg, ./Image/99.jpeg" 
+        data-subtitle="Intensive Lip Balm · 4.8<span class='unit'>g</span>"
+        data-price="200 EGP"
+        data-desc="Balea Intensive Lip Balm, enriched with shea butter and argan oil, protects lips from dryness. This vegan lip balm leaves lips noticeably soft and smooth. Its formula, enriched with shea butter and argan oil, helps retain moisture and protect lips from dryness. Thanks to sunflower wax, this balm ensures excellent results. Ideal for daily use, it leaves lips feeling pleasantly soft."
+        data-ingredients="Cabbage seed oil, sunflower seed wax, hydrogenated palm oil, candelilla wax, hydrogenated rapeseed oil, shea butter, argan kernel oil, orange peel oil, sunflower seed oil, sea buckthorn fruit extract, rosemary leaf extract."
+        data-instructions="Apply a thin layer to lips.">
+        <div class="product-img-wrap">
+          <img src="./Image/9.jpeg" alt="Lip Care Intensive" class="product-photo" style="object-fit: cover;">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Intensive Lip Balm</p>
+        <p class="product-type-tag">Lip Care · 4.8<span class="unit">g</span></p>
+        <p class="product-price">200 EGP</p>
+      </div>
+
+      <!-- PRODUCT 12-->
+      <div class="product-card" onclick="showProduct('toner')" 
+        data-gallery="./Image/11.jpeg, ./Image/1111.jpeg" 
+        data-subtitle="High Shine Lip Gloss · 10<span class='unit'>ml</span>"
+        data-price="180 EGP"
+        data-desc="High shine and a refreshing fruity scent. Essence Juicy Bomb Shine 104 Poppin' Pomegranate Lip Gloss guarantees glossy, beautiful lips in no time—without the stickiness! It features a clean cosmetic formula and a tube and cap made from a single-material polyethylene material that is at least 90% recyclable. Main color: Red."
+        data-ingredients="Castor seed oil, sweet almond oil, Stevia rebaudiana extract, canola oil, carrot seed oil, sunflower seed oil, glycerin, carrot root extract (Daucus carota sativa)."
+        data-instructions="Apply the lip gloss. The application provides instant shine.;Wear it alone for a natural look, or over lip liner for added color and definition.">
+        <div class="product-img-wrap">
+          <img src="./Image/11.jpeg" alt="Essence Juicy Bomb Shine 104 Poppin' Pomegranate, 10 ml" class="product-photo">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Essence Juicy Bomb Shine 104 Poppin' Pomegranate</p>
+        <p class="product-type-tag">Lip Gloss · 10<span class="unit">ml</span></p>
+        <p class="product-price">180 EGP</p>
+      </div>
+
+      <!-- PRODUCT 13 -->
+      <div class="product-card" onclick="showProduct('toner')" 
+        data-gallery="./Image/12.jpeg, ./Image/122.jpeg" 
+        data-subtitle="High Shine Lip Gloss · 10<span class='unit'>ml</span>"
+        data-price="180 EGP"
+        data-desc="High shine, a refreshing fruity scent, and skin-friendly ingredients ensure that Essence Juicy Bomb Shine 101 Lip Gloss delivers glossy, beautiful lips in no time—without any stickiness! Whether worn alone or over lipstick, Juicy Bomb Shine 101 is a versatile product that deserves a place in any makeup collection. Main color: Clear."
+        data-ingredients="Castor seed oil, sweet almond oil, Stevia rebaudiana extract."
+        data-instructions="Apply the lip gloss with a brush for instant shine.;Wear it alone for a natural, fresh look, or over lip liner for added color and definition.">
+        <div class="product-img-wrap">
+          <img src="./Image/12.jpeg" alt="Essence Juicy Bomb Shine 101 Lovely Lychee, 10 ml" class="product-photo">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Essence Juicy Bomb Shine 101 Lovely Lychee</p>
+        <p class="product-type-tag">Lip Gloss · 10<span class="unit">ml</span></p>
+        <p class="product-price">180 EGP</p>
+      </div>
+
+      <!-- PRODUCT 14-->
+      <div class="product-card" onclick="showProduct('toner')" 
+        data-gallery="./Image/14.png, ./Image/144.jpeg" 
+        data-subtitle="Sweetener Tablets · 1200 <span class='unit'>Tablets</span> · 72<span class='unit'>g</span>"
+        data-price="350 EGP"
+        data-desc="One sweetener tablet is equivalent to one sugar cube. Suitable for hot and cold beverages. Mevoli sweetener tablets are ideal for low-calorie sweetening. They can be used effectively to sweeten both hot and cold drinks."
+        data-ingredients="Sweetener: Cyclamate. Acidity Regulator: Sodium Carbonate. Acidizer: Sodium Citrate. Sweeteners: Saccharin, Lactose. Allergens: Contains milk and dairy products."
+        data-instructions="Before first use, remove the safety ring by pulling firmly.">
+        <div class="product-img-wrap">
+          <img src="./Image/14.png" alt="Sweetener tablets, 1,200 pcs., 72 g" class="product-photo">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Sweetener Tablets</p>
+        <p class="product-type-tag">Sweetener · 1200<span class="unit">pcs</span> · 72<span class="unit">g</span></p>
+        <p class="product-price">350 EGP</p>
+      </div>
+
+      <!-- PRODUCT 15-->
+      <div class="product-card" onclick="showProduct('toner')" 
+        data-gallery="./Image/15.jpeg, ./Image/155.jpeg" 
+        data-subtitle="Hyaluronic Acid Concentrate Capsules for Skin · 7<span class='unit'>Capsules</span>"
+        data-price="250 EGP"
+        data-desc="Provides intense hydration. Reduces wrinkles and fine lines for silky-smooth skin. Balea Hyaluronic Acid Concentrate is an intensive hydration booster that revitalizes and smooths the skin. The complex of active ingredients with hyaluronic acid helps plump the skin from within and reduces wrinkles and fine lines with regular use.** Additionally, the hyaluronic acid complex stimulates the skin's natural production of hyaluronic acid and supports the regeneration process. After use, skin is silky-smooth and deeply hydrated, for visibly plumper skin."
+        data-ingredients="Coconut Alkanes, Passionflower Seed Oil, Pistachio Kernel Oil, Fucus Vesicum Extract, Soybean Oil, Fragrance."
+        data-instructions="After cleansing, apply the concentrate to the face, neck, and décolleté with your fingertips. Gently massage in. Regular use (morning and evening) is recommended. One capsule contains enough for one application. The product's compatibility with the skin has been confirmed by a dermatologist.">
+        <div class="product-img-wrap">
+          <img src="./Image/15.jpeg" alt="Hyaluronic Acid Concentrate" class="product-photo">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Hyaluronic Acid Concentrate</p>
+        <p class="product-type-tag">Capsules · 7<span class="unit">Capsules</span></p>
+        <p class="product-price">250 EGP</p>
+      </div>
+
+      <!-- PRODUCT 16-->
+      <div class="product-card" onclick="showProduct('toner')" 
+        data-gallery="./Image/16.jpeg, ./Image/166.jpeg" 
+        data-subtitle="Retinol Concentrated Skin Capsules · 7<span class='unit'>Capsules</span>"
+        data-price="250 EGP"
+        data-desc="A retinol-rich skincare concentrate that firms and smooths the skin, potentially rejuvenating its appearance. Ideal for nighttime use. Balea Retinol Concentrate is a special, pampering skincare product that effectively contributes to smoother skin. Its potent formula combines retinol with the plant collagen stimulator bakuchiol. This combination supports skin renewal, stimulates the production of natural collagen, and thus combats the signs of aging. With regular use, the concentrate improves firmness and elasticity and reduces wrinkles. Ideal for nighttime use."
+        data-ingredients="Limnanthes Alba Seed Oil, Ginseng Root Extract, Sunflower Seed Oil."
+        data-instructions="After cleansing, apply the concentrate to the face, neck, and décolleté with your fingertips.;Avoid the eye and lip area.;Gently massage in.;Regular use (morning and evening) is recommended.;One capsule contains enough for one application.;Dermatologically approved.">
+        <div class="product-img-wrap">
+          <img src="./Image/16.jpeg" alt="Retinol Concentrated Skin Capsules" class="product-photo" style="object-fit: cover;">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Retinol Concentrated Skin Capsules</p>
+        <p class="product-type-tag">Capsules · 7<span class="unit">Capsules</span></p>
+        <p class="product-price">250 EGP</p>
+      </div>
+
+      <!-- PRODUCT 17-->
+      <div class="product-card" onclick="showProduct('toner')" 
+        data-gallery="./Image/17.jpeg, ./Image/177.jpeg" 
+        data-subtitle="Beauty Serum with Collagen and Retinol · 30<span class='unit'>ml</span>"
+        data-price="700 EGP"
+        data-desc="This facial serum with peptides and acacia collagen improves skin elasticity, reduces the depth of wrinkles for smoother skin, and provides intense hydration. Balea's Collagen and Retinol Serum offers intensive care for firmer, more radiant skin. Its innovative formula combines peptides and acacia collagen to stimulate the skin's natural collagen production and reduce its loss. Retinol and retinyl palmitate support the skin's structure. Additionally, the serum provides soothing hydration and strengthens the skin barrier, resulting in smoother, more even-toned skin."
+        data-ingredients="Water, Soybean Oil, Glycerin, Sweet Almond Oil, Fragrance, Sunflower Seed Oil, Rosemary Leaf Extract."
+        data-instructions="Apply 2-3 drops to clean skin on the face, neck, and décolleté as needed, morning and evening, and massage gently.;For best results, shake the bottle gently before use.;Dip the empty dropper into the bottle while pressing down on the juice cap, then release it.;Remove the filled dropper and add the serum.">
+        <div class="product-img-wrap">
+          <img src="./Image/17.jpeg" alt="Beauty Serum with Collagen and Retinol" class="product-photo" style="object-fit: cover;">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Beauty Serum with Collagen and Retinol</p>
+        <p class="product-type-tag">Serum · 30<span class="unit">ml</span></p>
+        <p class="product-price">700 EGP</p>
+      </div>
+
+      <!-- PRODUCT 18-->
+      <div class="product-card" onclick="showProduct('toner')" 
+        data-gallery="./Image/18.jpeg, ./Image/188.jpeg" 
+        data-subtitle="3-in-1 Cleanser, Scrub, and Mask · 150<span class='unit'>ml</span>"
+        data-price="Sold Out"
+        data-desc="Complete skincare with three functions in one product: cleansing, exfoliating, and moisturizing. Contains pink clay, salicylic acid, and zinc to combat blemishes and blackheads. Deeply cleanses pores. Vegan. With the practical 3-in-1 Balea Cleanser, Scrub, and Mask, skincare becomes easy and complete. This versatile product combines three functions in one: cleansing, exfoliating, and moisturizing. It cleanses the skin of deep-seated impurities in pores and removes dead skin cells. Ideal for daily care against blemishes and blackheads."
+        data-ingredients="Water, Glycerin, Hybrid Sunflower Oil, Hydrogenated Castor Oil, Pumice Stone, Fragrance, Zinc PCA."
+        data-instructions="Cleansing: Dispense a hazelnut-sized amount daily with a little water into your hands, then massage onto the face and rinse thoroughly. Avoid the eye and mouth area.;Exfoliating: Apply daily or every other day to damp skin and massage in circular motions. Wash it off thoroughly.;Mask: Apply two to three times a week to dry skin. Leave on for 3-5 minutes. Wash it off thoroughly.">
+        <div class="product-img-wrap">
+          <img src="./Image/18.jpeg" alt="3-in-1 Cleanser, Scrub, and Mask" class="product-photo" style="object-fit: cover;">
+          <span class="prod-badge badge-sale">Sold Out</span>
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">3-in-1 Cleanser, Scrub, and Mask</p>
+        <p class="product-type-tag">Cleanser · 150<span class="unit">ml</span></p>
+        <p class="product-price">Sold Out</p>
+      </div>
+
+      <!-- PRODUCT 19-->
+      <div class="product-card" onclick="showProduct('toner')" 
+        data-gallery="./Image/19.jpeg, ./Image/199.jpeg" 
+        data-subtitle="Lash Princess Volumizing Mascara · 12<span class='unit'>ml</span>"
+        data-price="280 EGP"
+        data-desc="Lash Princess Volumizing Mascara in black visibly lengthens lashes, giving them a full and captivating look. The special conical fiber brush ensures incredible volume and a distinctive finish."
+        data-ingredients="Water, Rice Bran Wax, Carnauba Wax, Sunflower Seed Wax, Hydrogenated Castor Oil, Sumac Fruit Wax."
+        data-instructions="Pull the brush in a light, circular motion, then apply the mascara to your lashes from root to tip in a zigzag motion.;Apply several coats for added volume.">
+        <div class="product-img-wrap">
+          <img src="./Image/19.jpeg" alt="Lash Princess Volumizing Mascara" class="product-photo" style="object-fit: cover;">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Lash Princess Volumizing Mascara</p>
+        <p class="product-type-tag">Mascara · 12<span class="unit">ml</span></p>
+        <p class="product-price">280 EGP</p>
+      </div>
+
+      <!-- PRODUCT 20-->
+      <div class="product-card" onclick="showProduct('serum')" 
+        data-gallery="./Image/20.jpeg, ./Image/200.jpeg" 
+        data-subtitle="Intensive Repair Hair Oil · 100<span class='unit'>ml</span>"
+        data-price="450 EGP"
+        data-desc="A nourishing oil enriched with argan oil, marula oil, and babassu oil. Provides heat protection up to 230°C. For strong, smooth hair, Balea Professional Intensive Repair Hair Oil offers superior care for damaged and dry hair. Its ultra-light formula nourishes hair without weighing it down, making it ideal for daily use."
+        data-ingredients="Sunflower Hybrid Oil, Sunflower Seed Oil, Argan Kernel Oil, Urbena Oleifera Seed Oil, Sclerocaria Peria Seed Oil, Fragrance, Citrus Aurantium Peel Oil."
+        data-instructions="Can be used before shampooing or after towel-drying.;Distribute a small amount through the ends of the hair.;Note: Due to the high percentage of natural oils, slight color variations or cloudiness may occur. This does not affect the product's quality.;Please keep away from direct sunlight.">
+        <div class="product-img-wrap">
+          <img src="./Image/20.jpeg" alt="Intensive Repair Hair Oil" class="product-photo" style="object-fit: cover;">
+          <button class="prod-view">View Details</button>
+        </div>
+        <p class="product-name">Intensive Repair Hair Oil</p>
+        <p class="product-type-tag">Hair Oil · 100<span class="unit">ml</span></p>
+        <p class="product-price">450 EGP</p>
+      </div>
+    </div>
+  </section>
+
+  <footer style="margin-top: 4rem;">
+    <div class="foot-bottom"><p>© 2026 Pure Glow. All rights reserved.</p></div>
+  </footer>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PRODUCT DETAIL PAGES
+═══════════════════════════════════════════ -->
+
+<!-- ── SERUM DETAIL ── -->
+<div id="detail-serum" class="page">
+  <nav>
+    <div class="nav-logo" onclick="showPage('home-page')"><img src="./Image/Logo.png" alt="Pure Glow logo"><span class="nav-brand">PURE GLOW</span></div>
+    <ul class="nav-links"><li><a onclick="showPage('home-page');scrollToSection('products')">Collection</a></li><li><a onclick="showPage('home-page');scrollToSection('about')">About</a></li></ul>
+  </nav>
+  <div class="back-bar" onclick="showPage('all-collection-page')"><button class="back-btn"><span class="back-arrow">←</span> Back to Collection</button></div>
+
+  <div class="detail-hero">
+    <div class="detail-gallery">
+      <div class="detail-thumbs">
+        <div class="detail-thumb active">Front</div>
+        <div class="detail-thumb">Side</div>
+        <div class="detail-thumb">Texture</div>
+      </div>
+      <img src="./Image/1.jpeg" alt="Hair Mask" class="detail-main-img" style="object-fit: contain;">
+    </div>
+
+    <div class="detail-info fade-in">
+      <p class="detail-eyebrow">Intensive Care · Hair Treatment</p>
+      <h1 class="detail-title">Hair Mask<br>Natural Beauty</h1>
+      <p class="detail-subtitle"></p>
+      <div class="detail-stars">★★★★★</div>
+      <p class="detail-price"></p>
+      <p class="detail-reviews">4.9 · 238 reviews</p>
+
+      <p class="detail-desc"></p>
+
+      <div class="detail-ingredients-section">
+        <h4>Ingredients:</h4>
+        <p class="detail-ingredients-list"></p>
+      </div>
+
+      <div class="detail-instructions-section">
+        <h4>Directions for use:</h4>
+        <ul class="instructions-list">
+          <!-- Dynamic content will go here -->
+        </ul>
+      </div>
+
+      <div class="detail-contact-note">
+        <strong>Interested in this product?</strong> Visit us in store or reach out via Instagram <strong>@pureglow</strong> — we'd love to help you find your perfect routine.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MASK DETAIL ── -->
+<div id="detail-mask" class="page">
+  <nav>
+    <div class="nav-logo" onclick="showPage('home-page')"><img src="./Image/Logo.png" alt="Pure Glow logo"><span class="nav-brand">PURE GLOW</span></div>
+    <ul class="nav-links"><li><a onclick="showPage('home-page');scrollToSection('products')">Collection</a></li><li><a onclick="showPage('home-page');scrollToSection('about')">About</a></li></ul>
+  </nav>
+  <div class="back-bar" onclick="showPage('all-collection-page')"><button class="back-btn"><span class="back-arrow">←</span> Back to Collection</button></div>
+
+  <div class="detail-hero">
+    <div class="detail-gallery">
+      <div class="detail-thumbs">
+        <div class="detail-thumb active">Front</div>
+        <div class="detail-thumb">Open</div>
+        <div class="detail-thumb">Texture</div>
+      </div>
+      <img src="./Image/2.jpeg" alt="Deodorant Spray" class="detail-main-img" style="object-fit: contain;">
+    </div>
+
+    <div class="detail-info fade-in">
+      <p class="detail-eyebrow">Fragrance · 24h Protection</p>
+      <h1 class="detail-title">Glamorous<br>Moment</h1>
+      <p class="detail-subtitle"></p>
+      <div class="detail-stars">★★★★★</div>
+      <p class="detail-price"></p>
+      <p class="detail-reviews">5.0 · 142 reviews</p>
+
+      <p class="detail-desc"></p>
+
+      <div class="detail-ingredients-section">
+        <h4>Ingredients:</h4>
+        <p class="detail-ingredients-list"></p>
+      </div>
+
+      <div class="detail-instructions-section">
+        <h4>Directions for use:</h4>
+        <ul class="instructions-list">
+          <!-- Dynamic content will go here -->
+        </ul>
+      </div>
+
+      <div class="detail-contact-note">
+        <strong>Interested in this product?</strong> Visit us in store or reach out via Instagram <strong>@pureglow</strong> — we'd love to help you find your perfect routine.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MOISTURISER DETAIL ── -->
+<div id="detail-moisturiser" class="page">
+  <nav>
+    <div class="nav-logo" onclick="showPage('home-page')"><img src="./Image/Logo.png" alt="Pure Glow logo"><span class="nav-brand">PURE GLOW</span></div>
+    <ul class="nav-links"><li><a onclick="showPage('home-page');scrollToSection('products')">Collection</a></li><li><a onclick="showPage('home-page');scrollToSection('about')">About</a></li></ul>
+  </nav>
+  <div class="back-bar" onclick="showPage('all-collection-page')"><button class="back-btn"><span class="back-arrow">←</span> Back to Collection</button></div>
+
+  <div class="detail-hero">
+    <div class="detail-gallery">
+      <div class="detail-thumbs">
+        <div class="detail-thumb active">Front</div>
+        <div class="detail-thumb">Side</div>
+        <div class="detail-thumb">Texture</div>
+      </div>
+      <img src="./Image/3.jpeg" alt="Hand Cream Olive" class="detail-main-img">
+    </div>
+
+    <div class="detail-info fade-in">
+      <p class="detail-eyebrow">Intensive Care · Dry Skin</p>
+      <h1 class="detail-title">Olive<br>Handcreme</h1>
+      <p class="detail-subtitle"></p>
+      <div class="detail-stars">★★★★★</div>
+      <p class="detail-price"></p>
+      <p class="detail-reviews">4.8 · 319 reviews</p>
+
+      <p class="detail-desc"></p>
+
+      <div class="detail-ingredients-section">
+        <h4>Ingredients:</h4>
+        <p class="detail-ingredients-list"></p>
+      </div>
+
+      <div class="detail-instructions-section">
+        <h4>Directions for use:</h4>
+        <ul class="instructions-list">
+          <!-- Dynamic content will go here -->
+        </ul>
+      </div>
+
+      <div class="detail-contact-note">
+        <strong>Interested in this product?</strong> Visit us in store or reach out via Instagram <strong>@pureglow</strong> — we'd love to help you find your perfect routine.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── TONER DETAIL ── -->
+<div id="detail-toner" class="page">
+  <nav>
+    <div class="nav-logo" onclick="showPage('home-page')"><img src="./Image/Logo.png" alt="Pure Glow logo"><span class="nav-brand">PURE GLOW</span></div>
+    <ul class="nav-links"><li><a onclick="showPage('home-page');scrollToSection('products')">Collection</a></li><li><a onclick="showPage('home-page');scrollToSection('about')">About</a></li></ul>
+  </nav>
+  <div class="back-bar" onclick="showPage('all-collection-page')"><button class="back-btn"><span class="back-arrow">←</span> Back to Collection</button></div>
+
+  <div class="detail-hero">
+    <div class="detail-gallery">
+      <div class="detail-thumbs">
+        <div class="detail-thumb active">Front</div>
+        <div class="detail-thumb">Side</div>
+        <div class="detail-thumb">Mist</div>
+      </div>
+      <img src="./Image/4.jpeg" alt="Lip Care Rosé" class="detail-main-img">
+    </div>
+
+    <div class="detail-info fade-in">
+      <p class="detail-eyebrow">Lippenpflege · Soft Color</p>
+      <h1 class="detail-title">Lip Care<br>Rosé</h1>
+      <p class="detail-subtitle"></p>
+      <div class="detail-stars">★★★★☆</div>
+      <p class="detail-price"></p>
+      <p class="detail-reviews">4.7 · 186 reviews</p>
+
+      <p class="detail-desc"></p>
+
+
+      <div class="detail-ingredients-section">
+        <h4>Ingredients:</h4>
+        <p class="detail-ingredients-list"></p>
+      </div>
+
+      <div class="detail-instructions-section">
+        <h4>Directions for use:</h4>
+        <ul class="instructions-list">
+          <!-- Dynamic content will go here -->
+        </ul>
+      </div>
+
+      <div class="detail-contact-note">
+        <strong>Interested in this product?</strong> Visit us in store or reach out via Instagram <strong>@pureglow</strong> — we'd love to help you find your perfect routine.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ JAVASCRIPT ═══════════════════ -->
+<script>
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const page = document.getElementById(pageId);
+  if (page) {
+    page.classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+}
+
+function showProduct(productKey) {
+  const card = event.currentTarget;
+  const name = card.querySelector('.product-name').innerText;
+  const img = card.querySelector('.product-photo').src;
+  const type = card.querySelector('.product-type-tag').innerHTML;
+  const gallery = card.getAttribute('data-gallery');
+  const subtitle = card.getAttribute('data-subtitle');
+  const desc = card.getAttribute('data-desc');
+  const price = card.getAttribute('data-price');
+  const ingredients = card.getAttribute('data-ingredients');
+  const instructions = card.getAttribute('data-instructions');
+
+  const detailPage = document.getElementById('detail-' + productKey);
+  if (detailPage) {
+    detailPage.querySelector('.detail-title').innerText = name;
+    detailPage.querySelector('.detail-main-img').src = img;
+    detailPage.querySelector('.detail-subtitle').innerHTML = subtitle || type; // Fallback to product type tag if no specific subtitle
+    const priceEl = detailPage.querySelector('.detail-price');
+    if (priceEl) {
+      priceEl.innerText = price || "";
+    }
+    detailPage.querySelector('.detail-desc').innerHTML = desc || "No detailed description available.";
+
+    const thumbContainer = detailPage.querySelector('.detail-thumbs');
+    if (thumbContainer) {
+      const images = gallery ? gallery.split(',') : [img];
+      thumbContainer.innerHTML = '';
+      images.forEach((src, index) => {
+        const thumb = document.createElement('div');
+        thumb.className = 'detail-thumb' + (index === 0 ? ' active' : '');
+        thumb.onclick = function() { changeDetailImage(src.trim(), this); };
+        thumb.innerHTML = `<img src="${src.trim()}" alt="thumb">`;
+        thumbContainer.appendChild(thumb);
+      });
+    }
+
+    // Populate Ingredients
+    const ingredientsListElement = detailPage.querySelector('.detail-ingredients-list');
+    if (ingredientsListElement) {
+      ingredientsListElement.innerText = ingredients || "Ingredients list not available.";
+    }
+
+    // Populate Directions for use
+    const instructionsSection = detailPage.querySelector('.detail-instructions-section'); // Get the whole section
+    const instructionsList = detailPage.querySelector('.instructions-list');
+    if (instructionsList) {
+      instructionsList.innerHTML = ''; // Clear existing
+      if (instructions) {
+        instructionsSection.style.display = 'block'; // Show the section if content exists
+        instructions.split(';').forEach(instruction => {
+          const li = document.createElement('li');
+          li.innerText = instruction.trim();
+          instructionsList.appendChild(li);
+        });
+      } else {
+        instructionsSection.style.display = 'none'; // Hide the section if no content
+      }
+    }
+  }
+  showPage('detail-' + productKey);
+}
+
+function changeDetailImage(src, thumbEl) {
+  const page = thumbEl.closest('.page');
+  const mainImg = page.querySelector('.detail-main-img');
+  if (mainImg) mainImg.src = src;
+  page.querySelectorAll('.detail-thumb').forEach(t => t.classList.remove('active'));
+  thumbEl.classList.add('active');
+}
+
+function scrollToSection(id) {
+  // If on detail page, go home first then scroll
+  const homePage = document.getElementById('home-page');
+  if (!homePage.classList.contains('active')) {
+    showPage('home-page');
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }, 300);
+  } else {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
+  }
+}
+
+// Scroll reveal for home page
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; observer.unobserve(e.target); }
+  });
+}, {threshold: 0.1});
+
+document.querySelectorAll('#home-page .product-card, #home-page .about-inner > div, #home-page .testi-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = 'opacity .6s ease, transform .6s ease';
+  observer.observe(el);
+});
+
+// Initialize "Sweep" hover effect for cards with galleries
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.product-card[data-gallery]').forEach(card => {
+    const gallery = card.getAttribute('data-gallery').split(',');
+    if (gallery.length > 1) {
+      const firstImg = gallery[0].trim();
+      const secondImg = gallery[1].trim();
+      if (firstImg !== secondImg) {
+        const wrap = card.querySelector('.product-img-wrap');
+        const primary = wrap.querySelector('.product-photo');
+        const secondary = document.createElement('img');
+        secondary.src = secondImg;
+        secondary.className = 'product-photo secondary';
+        if (primary.style.objectFit) secondary.style.objectFit = primary.style.objectFit;
+        wrap.appendChild(secondary);
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>

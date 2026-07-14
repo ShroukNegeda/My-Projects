@@ -1,0 +1,30 @@
+{
+  "name": "eventhub",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@react-oauth/google": "^0.13.4",
+    "country-state-city": "^3.2.1",
+    "file-saver": "^2.0.5",
+    "jszip": "^3.10.1",
+    "lz-string": "^1.5.0",
+    "next": "16.1.4",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-icons": "^5.5.0",
+    "recharts": "^3.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.4"
+  }
+}

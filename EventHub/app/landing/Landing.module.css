@@ -1,0 +1,340 @@
+.page {
+  background: #f5f7fa;
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  height: 420px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+
+.heroImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  z-index: 0;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(245, 247, 250, 1) 100%
+  );
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 520px;
+  padding: 0 80px;
+}
+
+
+.hero h1 {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  color: white;
+}
+
+.hero p {
+  font-size: 15px;
+  opacity: 0.9;
+  margin-bottom: 24px;
+  color: white;
+}
+
+.primaryBtn {
+  background: #ff7a00;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 36px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(255,122,0,0.35);
+  transition: 0.3s;
+}
+
+.primaryBtn:hover {
+  transform: translateY(-3px);
+}
+
+
+/* ================= SEARCH ================= */
+
+.searchWrapper {
+  padding: 40px 80px;
+  display: flex;
+  justify-content: center;
+}
+
+.searchBox {
+  width: 600px;
+  background: white;
+  border-radius: 30px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.searchBox input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+}
+
+
+/* ================= SECTIONS ================= */
+
+.section {
+  padding: 0 80px 50px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.sectionHeader h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.link {
+  color: #ff7a00;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+
+/* ================= CITIES ================= */
+
+.cityCard {
+  position: relative;
+  width: 180px;
+  height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: white;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.cityCard:hover {
+  transform: translateY(-6px);
+}
+
+.cityCard img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cityCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35));
+  z-index: 1;
+}
+
+.cityCard span {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ================= CARDS ================= */
+
+.cardsRow {
+  display: flex;
+  gap: 20px;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+}
+
+.cardsRow::-webkit-scrollbar {
+  display: none;
+}
+
+.cardsRow:active {
+  cursor: grabbing;
+}
+
+.card {
+  width: 260px;
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: 0.3s;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+.cardImage {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.cardBody {
+  padding: 16px;
+}
+
+.cardTitle {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.cardMeta {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.cardBtn {
+  margin-top: 12px;
+  width: 100%;
+  background: #ff7a00;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 0;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+
+/* ================= CTA GRID ================= */
+
+/* ================= CTA SECTION ================= */
+
+.ctaGrid {
+  padding: 0 80px 70px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.ctaCard {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  min-width: 220px;
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ctaCard h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.ctaCard p {
+  margin: 0 0 20px;
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.ctaCard:hover {
+  transform: translateY(-5px);
+}
+
+@media (max-width: 768px) {
+  .ctaGrid {
+    grid-template-columns: 1fr;
+  }
+  .ctaCard {
+    max-width: 100%;
+  }
+}
+
+
+
+/* ================= FOOTER ================= */
+
+.footer {
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px 20px;
+  color: #333;
+  border-top: 1px solid #ddd;
+}
+.footer > div {
+  flex: 1;
+  min-width: 180px;
+  text-align: center;
+}
+.footer .copyright {
+  flex-basis: 100%;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
