@@ -4,7 +4,7 @@ A professional personal portfolio built with **Next.js 16**, **Tailwind CSS**, a
 
 ## Live Demo
 
-[shrouk-negeda-portfolio.vercel.app](https://your-vercel-link-here.vercel.app)
+[shrouk-negeda-portfolio.vercel.app](https://my-projects-klq26qdwb-shrouknegedas-projects.vercel.app/)
 
 ## Preview
 
