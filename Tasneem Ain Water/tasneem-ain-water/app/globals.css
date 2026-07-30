@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'El Messiri', 'Segoe UI', sans-serif;
+  --font-body: 'IBM Plex Sans Arabic', 'Segoe UI', sans-serif;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: #0E74A6;
+  color: white;
+}
+
+:focus-visible {
+  outline: 2px solid #0E74A6;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.container-page {
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
