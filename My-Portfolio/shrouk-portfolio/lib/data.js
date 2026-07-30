@@ -110,7 +110,7 @@ export const featuredProjects = [
       "Full order placement and history flow",
     ],
     url: "https://route-academy-tasks.vercel.app/",
-    github: "https://github.com/ShroukNegeda",
+    github: "https://github.com/ShroukNegeda/Route-Academy-Tasks/tree/main/Final-Project",
     image: "/images/projects/freshcart.png",
   },
   {
@@ -127,7 +127,7 @@ export const featuredProjects = [
       "Fully responsive layout",
     ],
     url: "https://my-projects-sandy-one.vercel.app/landing",
-    github: "https://github.com/ShroukNegeda",
+    github: "https://github.com/ShroukNegeda/My-Projects/tree/main/EventHub",
     image: "/images/projects/eventhub.png",
   },
   {
@@ -144,7 +144,7 @@ export const featuredProjects = [
       "Fully responsive across all screen sizes",
     ],
     url: "https://my-projects-eosin-tau.vercel.app/",
-    github: "https://github.com/ShroukNegeda",
+    github: "https://github.com/ShroukNegeda/My-Projects/tree/main/Pure%20Glow",
     image: "/images/projects/pure-glow.png",
   },
   {
@@ -161,7 +161,7 @@ export const featuredProjects = [
       "Clean and minimal UI",
     ],
     url: "https://fourth-react-project.vercel.app/",
-    github: "https://github.com/ShroukNegeda",
+    github: "https://github.com/ShroukNegeda/ITI-Tasks/tree/master/18-%20Fourth%20React%20Project/book-app",
     image: "/images/projects/booknest.png",
   },
 ];
