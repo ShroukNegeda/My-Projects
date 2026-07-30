@@ -97,35 +97,71 @@ export const events = [
 
 export const featuredProjects = [
   {
+    slug: "freshcart",
     name: "FreshCart",
-    description:
-      "A full e-commerce storefront with product browsing, categories, brands, cart, wishlist, auth and order flows, built during the Route Academy training.",
+    description: "A full e-commerce storefront with product browsing, categories, brands, cart, wishlist, auth and order flows, built during the Route Academy training.",
+    longDescription: "FreshCart is a fully functional e-commerce web app built with React and a live REST API. It covers the complete shopping experience — browsing products by category or brand, adding items to a wishlist, managing a cart, authenticating with JWT, and placing orders. The project was the capstone of the Route Academy frontend diploma.",
     tags: ["React", "REST API", "Auth"],
+    tech: ["React", "React Router", "Axios", "JWT Auth", "Bootstrap 5", "REST API"],
+    highlights: [
+      "JWT-based authentication with protected routes",
+      "Cart and wishlist synced with the API in real time",
+      "Product filtering by category and brand",
+      "Full order placement and history flow",
+    ],
     url: "https://route-academy-tasks.vercel.app/",
+    github: "https://github.com/ShroukNegeda",
     image: "/images/projects/freshcart.png",
   },
   {
+    slug: "eventhub",
     name: "EventHub",
-    description:
-      "An events platform for discovering, favoriting and managing tickets for events, with a dedicated creation flow for organizers.",
+    description: "An events platform for discovering, favoriting and managing tickets for events, with a dedicated creation flow for organizers.",
+    longDescription: "EventHub is a React-based events platform where users can browse upcoming events, save favorites, manage their tickets, and organizers can create and publish new events. Built with a live REST API and a clean, responsive UI.",
     tags: ["React", "REST API"],
+    tech: ["React", "React Router", "Axios", "REST API", "Bootstrap 5"],
+    highlights: [
+      "Event discovery with search and category filters",
+      "Favorites and ticket management per user",
+      "Dedicated organizer flow for creating events",
+      "Fully responsive layout",
+    ],
     url: "https://my-projects-sandy-one.vercel.app/landing",
+    github: "https://github.com/ShroukNegeda",
     image: "/images/projects/eventhub.png",
   },
   {
+    slug: "pure-glow",
     name: "Pure Glow",
-    description:
-      "A skincare & beauty e-commerce landing page with a product catalog, detail pages, ratings and a brand story section.",
+    description: "A skincare & beauty e-commerce landing page with a product catalog, detail pages, ratings and a brand story section.",
+    longDescription: "Pure Glow is a skincare and beauty e-commerce front end built with React. It features a full product catalog, individual product detail pages with ratings and reviews, a brand story section, and a clean UI focused on the beauty niche.",
     tags: ["React", "E-commerce", "UI/UX"],
+    tech: ["React", "React Router", "CSS Modules", "Responsive Design"],
+    highlights: [
+      "Product catalog with detail pages and ratings",
+      "Brand story and about section",
+      "Clean, beauty-focused UI design",
+      "Fully responsive across all screen sizes",
+    ],
     url: "https://my-projects-eosin-tau.vercel.app/",
+    github: "https://github.com/ShroukNegeda",
     image: "/images/projects/pure-glow.png",
   },
   {
+    slug: "booknest",
     name: "BookNest",
-    description:
-      "A React project for browsing and organizing books, built as part of a frontend training curriculum.",
+    description: "A React project for browsing and organizing books, built as part of a frontend training curriculum.",
+    longDescription: "BookNest is a React application for browsing and organizing a collection of books. Users can view book listings, see details for each title, and manage their reading list. Built as part of a structured frontend training program.",
     tags: ["React", "JavaScript"],
+    tech: ["React", "React Router", "JavaScript (ES6+)", "CSS3"],
+    highlights: [
+      "Book browsing with detail view per title",
+      "Reading list management",
+      "Component-based architecture",
+      "Clean and minimal UI",
+    ],
     url: "https://fourth-react-project.vercel.app/",
+    github: "https://github.com/ShroukNegeda",
     image: "/images/projects/booknest.png",
   },
 ];

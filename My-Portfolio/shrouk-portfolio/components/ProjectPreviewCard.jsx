@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import FadeIn from "./FadeIn";
 import SpotlightCard from "./SpotlightCard";
@@ -9,7 +10,7 @@ export default function ProjectPreviewCard({ project, delay = 0 }) {
   return (
     <FadeIn delay={delay}>
       <SpotlightCard className="h-full">
-        <a href={project.url} target="_blank" rel="noreferrer" className="flex h-full flex-col focus-ring">
+        <Link href={`/projects/${project.slug}`} className="flex h-full flex-col focus-ring">
           <div className="relative aspect-[2.1/1] overflow-hidden border-b border-white/10 bg-night-100">
             <Image src={project.image} alt={`Screenshot of ${project.name}`} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-top"/>
             <div className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-night/80 backdrop-blur">
@@ -33,7 +34,7 @@ export default function ProjectPreviewCard({ project, delay = 0 }) {
               ))}
             </div>
           </div>
-        </a>
+        </Link>
       </SpotlightCard>
     </FadeIn>
   );

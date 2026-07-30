@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ExternalLink, GitFork, Star, FolderGit2 } from "lucide-react";
+import Link from "next/link";
 import SectionHeading from "./SectionHeading";
 import FadeIn from "./FadeIn";
 import SpotlightCard from "./SpotlightCard";
@@ -64,6 +65,12 @@ export default function Projects() {
           {featuredProjects.map((p, i) => (
             <ProjectPreviewCard key={p.name} project={p} delay={i * 0.07} />
           ))}
+        </div>
+
+        <div className="mt-8 flex justify-center">
+          <Link href="/projects" className="inline-flex items-center gap-2 rounded-full border border-dawn-gold/30 px-6 py-2.5 text-sm text-dawn-gold hover:bg-dawn-gold/10 transition">
+            View all projects <ExternalLink size={14} />
+          </Link>
         </div>
 
         <div className="mt-24 flex flex-wrap items-end justify-between gap-6">

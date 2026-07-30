@@ -4,7 +4,7 @@ A professional personal portfolio built with **Next.js 16**, **Tailwind CSS**, a
 
 ## Live Demo
 
-[shrouk-negeda-portfolio.vercel.app](https://my-projects-klq26qdwb-shrouknegedas-projects.vercel.app/)
+[shrouk-negeda-portfolio.vercel.app](https://your-vercel-link-here.vercel.app)
 
 ## Preview
 
@@ -14,6 +14,18 @@ A professional personal portfolio built with **Next.js 16**, **Tailwind CSS**, a
 | ![Skills](docs/screenshots/skills.png) | ![Featured Projects](docs/screenshots/projects-featured.png) |
 | ![GitHub Projects](docs/screenshots/projects-github.png) | ![Experience](docs/screenshots/experience.png) |
 | ![Courses](docs/screenshots/courses.png) | ![Contact](docs/screenshots/contact.png) |
+
+### Project Detail Page
+
+| | |
+|---|---|
+| ![Project Detail — Top](docs/screenshots/project-detail-1.png) | ![Project Detail — Bottom](docs/screenshots/project-detail-2.png) |
+
+### Project Detail Page
+
+| | |
+|---|---|
+| ![Project Detail — Top](docs/screenshots/project-detail-1.png) | ![Project Detail — Bottom](docs/screenshots/project-detail-2.png) |
 
 ## Signature Concept
 
