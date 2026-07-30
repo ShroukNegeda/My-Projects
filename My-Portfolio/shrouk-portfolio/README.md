@@ -19,7 +19,7 @@ A professional personal portfolio built with **Next.js 16**, **Tailwind CSS**, a
 
 | | |
 |---|---|
-| ![Project Detail — Top](docs/screenshots/detail-1.png) | ![Project Detail — Bottom](docs/screenshots/detail-2.png) |
+| ![Project Detail — Top](docs/screenshots/detail-1.png) | ![Project Detail — Bottom](docs/screenshots/detail-2.png) | 
 
 ## Signature Concept
 
