@@ -5,6 +5,14 @@ import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
 import RevealText from "./RevealText";
 import { profile } from "@/lib/data";
 
+function VercelIcon({ size = 20 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 76 65" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" />
+    </svg>
+  );
+}
+
 export default function Hero() {
   return (
     <section id="top" className="relative min-h-[100svh] flex items-center overflow-hidden pt-24 pb-16">
@@ -45,18 +53,24 @@ export default function Hero() {
             <a href="#contact" className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm text-sand hover:border-dawn-gold/60 hover:text-dawn-gold transition focus-ring">
               Get in touch
             </a>
+            <a href="https://drive.google.com/file/d/17Kz16PeINgDSltGOVwIfSaazVk6qYuHG/view?usp=sharing" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm text-sand hover:border-dawn-gold/60 hover:text-dawn-gold transition focus-ring">
+              View CV
+            </a>
+          </motion.div>
 
-            <div className="flex items-center gap-3 ml-1">
-              <a aria-label="GitHub" href={profile.github} target="_blank" rel="noreferrer" className="text-mist hover:text-dawn-gold transition focus-ring">
-                <Github size={20} />
-              </a>
-              <a aria-label="LinkedIn" href={profile.linkedin} target="_blank" rel="noreferrer" className="text-mist hover:text-dawn-gold transition focus-ring">
-                <Linkedin size={20} />
-              </a>
-              <a aria-label="Email" href={`mailto:${profile.email}`} className="text-mist hover:text-dawn-gold transition focus-ring">
-                <Mail size={20} />
-              </a>
-            </div>
+          <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.8 }} className="mt-5 flex items-center gap-4">
+            <a aria-label="Vercel" href="https://vercel.com/shrouknegedas-projects" target="_blank" rel="noreferrer" className="text-mist hover:text-dawn-gold transition focus-ring">
+              <VercelIcon size={20} />
+            </a>
+            <a aria-label="GitHub" href={profile.github} target="_blank" rel="noreferrer" className="text-mist hover:text-dawn-gold transition focus-ring">
+              <Github size={20} />
+            </a>
+            <a aria-label="LinkedIn" href={profile.linkedin} target="_blank" rel="noreferrer" className="text-mist hover:text-dawn-gold transition focus-ring">
+              <Linkedin size={20} />
+            </a>
+            <a aria-label="Email" href={`mailto:${profile.email}`} className="text-mist hover:text-dawn-gold transition focus-ring">
+              <Mail size={20} />
+            </a>
           </motion.div>
         </div>
 
