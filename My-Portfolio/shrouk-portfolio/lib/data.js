@@ -79,6 +79,7 @@ export const experience = [
 ];
 
 export const courses = [
+  { name: "AI for you", org: "Oracle University", date: "Aug 2026" },
   { name: "Introduction to Cyber Security", org: "Cisco", date: "Jul 2026" },
   { name: "Frontend", org: "Elevvo", date: "Mar 2026" },
   { name: "Frontend Diploma", org: "Route Academy", date: "Feb 2026" },
