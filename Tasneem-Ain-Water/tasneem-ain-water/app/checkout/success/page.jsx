@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { BANK_DETAILS } from '@/lib/siteConfig';
+import { CheckCircle, Banknote, Building2 } from 'lucide-react';
 
 export default function CheckoutSuccessPage() {
   return (
@@ -24,27 +25,30 @@ function SuccessContent() {
     <>
       <Navbar />
       <main className="container-page py-20 max-w-lg mx-auto text-center min-h-[50vh]">
-        <p className="text-6xl mb-4">✅</p>
+        <CheckCircle className="w-16 h-16 text-water-600 mx-auto mb-4" />
         <h1 className="font-display text-2xl font-bold mb-2">تم استلام طلبك رقم #{orderId}</h1>
 
         {method === 'cod' && (
-          <p className="text-ink-700/60 mb-8">
-            طلبك قيد التجهيز الآن، دفع المبلغ كاش أو بالشبكة للمندوب وقت التوصيل.
-          </p>
+          <div className="flex items-center justify-center gap-2 text-ink-700/60 mb-8">
+            <Banknote className="w-5 h-5" />
+            <p>طلبك قيد التجهيز، يمكنك الدفع نقداً للمندوب عند استلام الطلب.</p>
+          </div>
+        )}
+
+        {method === 'network' && (
+          <div className="flex items-center justify-center gap-2 text-ink-700/60 mb-8">
+            <Banknote className="w-5 h-5" />
+            <p>طلبك قيد التجهيز، يمكنك الدفع بالبطاقة البنكية للمندوب عند استلام الطلب.</p>
+          </div>
         )}
 
         {method === 'bank_transfer' && (
           <>
             <p className="text-ink-700/60 mb-6">
-              تحوبل المبلغ على الحساب البنكي التالي، وطلبك هيتأكد فور استلام التحويل.
+              شكراً لك، تم استلام بيانات التحويل وسيتم مراجعتها وتأكيد طلبك في أقرب وقت.
             </p>
-            <div className="bg-white rounded-2xl border border-water-400/15 p-6 text-right text-sm mb-8 space-y-2">
-              <p><span className="text-ink-700/50">اسم البنك:</span> <span className="font-semibold">{BANK_DETAILS.bankName}</span></p>
-              <p><span className="text-ink-700/50">اسم الحساب:</span> <span className="font-semibold">{BANK_DETAILS.accountName}</span></p>
-              <p dir="ltr" className="text-right"><span className="text-ink-700/50 ml-1">IBAN:</span> <span className="font-semibold font-mono">{BANK_DETAILS.iban}</span></p>
-            </div>
-            <p className="text-xs text-ink-700/40 mb-8">
-              بعد عمليه التحويل نرجوا ارسال رقم العملية لنا عبر واتساب أو من صفحة "طلباتي" للتاكد من الطلب .
+            <p className="text-sm text-ink-700/50 mb-8">
+              يمكنك متابعة حالة طلبك من صفحة "طلباتى".
             </p>
           </>
         )}

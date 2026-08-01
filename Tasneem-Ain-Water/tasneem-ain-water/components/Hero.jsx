@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import WaveDivider from './WaveDivider';
 import DropletIcon from './DropletIcon';
 
@@ -19,29 +20,21 @@ export default function Hero() {
             مياه Tasneem Ain المعدنية الطبيعية، مُعبأة عند المصدر ومُوصّلة لباب بيتك في نفس اليوم بجميع مناطق المملكة.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <Link
-              href="#products"
-              className="px-7 py-3.5 rounded-full bg-water-600 text-white font-semibold hover:bg-water-700 transition-colors shadow-lg shadow-water-600/20"
-            >
+            <Link href="#products" className="px-7 py-3.5 rounded-full bg-water-600 text-white font-semibold hover:bg-water-700 transition-colors shadow-lg shadow-water-600/20">
               اطلب الآن
             </Link>
-            <Link
-              href="#about"
-              className="px-7 py-3.5 rounded-full border border-water-500/40 text-water-700 font-semibold hover:bg-white transition-colors"
-            >
+            <Link href="#about" className="px-7 py-3.5 rounded-full border border-water-500/40 text-water-700 font-semibold hover:bg-white transition-colors">
               تعرف على القصة
             </Link>
           </div>
         </div>
 
         <div className="relative flex justify-center">
-          <div className="relative w-56 md:w-64 aspect-[2/5] animate-float">
+          <div className="relative w-80 md:w-96 aspect-square animate-float">
             <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-b from-white/40 to-water-400/30 backdrop-blur-sm border border-white/60 shadow-2xl shadow-water-600/20" />
-            <div className="absolute inset-x-6 top-8 bottom-8 rounded-[1.75rem] bg-gradient-to-b from-water-400/40 to-water-600/50 border border-white/40 flex items-center justify-center">
-              <div className="text-center text-white">
-                <DropletIcon className="w-10 h-10 mx-auto mb-2 opacity-90" />
-                <p className="font-display text-xl font-bold tracking-wide">Tasneem Ain</p>
-              </div>
+            <div className="absolute inset-x-6 top-8 bottom-8 rounded-[1.75rem] overflow-hidden flex flex-col items-end justify-end">
+              <Image src="/Hero.png" alt="Hero" fill className="object-cover" />
+              <Image src="/Logo.png" alt="Tasneem Ain" width={200} height={80} className="relative z-10 mb-2 ms-8 w-auto h-16 drop-shadow-lg" />
             </div>
           </div>
           <div className="absolute -z-10 w-72 h-72 rounded-full bg-water-400/20 blur-3xl" />

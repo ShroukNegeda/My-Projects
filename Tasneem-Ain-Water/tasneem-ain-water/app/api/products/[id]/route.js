@@ -55,6 +55,14 @@ export async function DELETE(req, { params }) {
   }
 
   const { id } = await params;
-  db.prepare('UPDATE products SET is_active = 0 WHERE id = ?').run(id);
+  const { hard } = await req.json().catch(() => ({}));
+
+  if (hard) {
+    db.prepare('DELETE FROM order_items WHERE product_id = ?').run(id);
+    db.prepare('DELETE FROM products WHERE id = ?').run(id);
+  } else {
+    db.prepare('UPDATE products SET is_active = 0 WHERE id = ?').run(id);
+  }
+
   return NextResponse.json({ ok: true });
 }

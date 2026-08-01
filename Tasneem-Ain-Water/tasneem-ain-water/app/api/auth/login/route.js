@@ -11,7 +11,7 @@ export async function POST(req) {
 
     const user = db.prepare('SELECT * FROM users WHERE email = ?').get(email.toLowerCase().trim());
     if (!user || !verifyPassword(password, user.password_hash)) {
-      return NextResponse.json({ error: 'الإيميل أو كلمة المرور غلط' }, { status: 401 });
+      return NextResponse.json({ error: 'الإيميل أو كلمة المرور خطأ' }, { status: 401 });
     }
 
     await setSessionCookie({ userId: user.id, isAdmin: !!user.is_admin });
@@ -21,6 +21,6 @@ export async function POST(req) {
     });
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ error: 'حصل خطأ غير متوقع، حاول مره اخرى' }, { status: 500 });
+    return NextResponse.json({ error: 'حدث خطأ غير متوقع، حاول مره اخرى' }, { status: 500 });
   }
 }

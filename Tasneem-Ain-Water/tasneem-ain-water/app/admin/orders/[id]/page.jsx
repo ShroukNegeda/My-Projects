@@ -5,7 +5,8 @@ import PaymentStatusUpdater from '@/components/PaymentStatusUpdater';
 
 const PAYMENT_METHOD_LABELS = {
   cod: 'الدفع عند الاستلام',
-  bank_transfer: 'تحويل بنكي',
+  network: 'الدفع بالشبكة مع المندوب',
+  bank_transfer: 'تحويل بنكى',
 };
 
 export default async function AdminOrderDetail({ params }) {
@@ -41,7 +42,7 @@ export default async function AdminOrderDetail({ params }) {
                   <th className="py-2 font-medium">المنتج</th>
                   <th className="py-2 font-medium">السعر</th>
                   <th className="py-2 font-medium">الكمية</th>
-                  <th className="py-2 font-medium">الإجمالي</th>
+                  <th className="py-2 font-medium">الإجمالى</th>
                 </tr>
               </thead>
               <tbody>
@@ -69,7 +70,7 @@ export default async function AdminOrderDetail({ params }) {
                 <dd className="font-medium text-ink-900">{order.city}</dd>
               </div>
               <div>
-                <dt className="text-ink-700/40 mb-1">الحي</dt>
+                <dt className="text-ink-700/40 mb-1">الحى</dt>
                 <dd className="font-medium text-ink-900">{order.district || '—'}</dd>
               </div>
               <div className="sm:col-span-2">
@@ -100,7 +101,7 @@ export default async function AdminOrderDetail({ params }) {
                 <dd className="font-medium text-ink-900">{order.customer_name}</dd>
               </div>
               <div>
-                <dt className="text-ink-700/40 mb-1">البريد الإلكتروني</dt>
+                <dt className="text-ink-700/40 mb-1">البريد الإلكترونى</dt>
                 <dd className="font-medium text-ink-900">{order.user_email}</dd>
               </div>
               <div>
@@ -121,6 +122,16 @@ export default async function AdminOrderDetail({ params }) {
                 <div>
                   <dt className="text-ink-700/40 mb-1">رقم عملية التحويل</dt>
                   <dd className="font-medium text-ink-900 font-mono">{order.payment_note}</dd>
+                </div>
+              )}
+              {order.transfer_image_url && (
+                <div>
+                  <dt className="text-ink-700/40 mb-2">صورة إيصال التحويل</dt>
+                  <dd>
+                    <a href={order.transfer_image_url} target="_blank" rel="noreferrer">
+                      <img src={order.transfer_image_url} alt="إيصال التحويل" className="w-full rounded-xl border border-water-400/20 object-cover max-h-48 cursor-pointer hover:opacity-90" />
+                    </a>
+                  </dd>
                 </div>
               )}
               <div>

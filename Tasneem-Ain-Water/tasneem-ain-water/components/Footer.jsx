@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import DropletIcon from './DropletIcon';
 
 export default function Footer() {
@@ -5,10 +6,7 @@ export default function Footer() {
     <footer className="bg-ink-900 text-white/80">
       <div className="container-page py-14 grid sm:grid-cols-3 gap-10">
         <div>
-          <div className="flex items-center gap-2 font-display text-xl font-bold text-white mb-3">
-            <DropletIcon className="w-6 h-6 text-water-400" />
-            Tasneem Ain
-          </div>
+          <Image src="/Logoo.png" alt="Tasneem Ain" width={200} height={80} className="h-20 w-auto mb-3" />
           <p className="text-sm leading-relaxed text-white/60">
             مياه معدنية طبيعية نقية، من الينبوع إلى بيتك، بجودة موثوقة في جميع أنحاء المملكة العربية السعودية.
           </p>
@@ -27,7 +25,7 @@ export default function Footer() {
           <h4 className="text-white font-semibold mb-3">تواصل معنا</h4>
           <ul className="space-y-2 text-sm text-white/60">
             <li>الرياض، المملكة العربية السعودية</li>
-            <li dir="ltr" className="text-right">+966 5X XXX XXXX</li>
+            <li dir="ltr" className="text-right">+966 50 431 9699</li>
             <li>support@salsabil.sa</li>
           </ul>
         </div>

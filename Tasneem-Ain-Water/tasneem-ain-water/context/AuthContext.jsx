@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import { CartProvider } from '@/context/CartContext';
 
 const AuthContext = createContext(null);
 
@@ -24,18 +25,22 @@ export function AuthProvider({ children }) {
 
   async function logout() {
     await fetch('/api/auth/logout', { method: 'POST' });
+    if (user?.id) {
+      localStorage.removeItem(`salsabil_cart_${user.id}`);
+    }
+    localStorage.removeItem('salsabil_cart_guest');
     setUser(null);
   }
 
   return (
     <AuthContext.Provider value={{ user, setUser, loading, refresh, logout }}>
-      {children}
+      <CartProvider userId={user?.id}>{children}</CartProvider>
     </AuthContext.Provider>
   );
 }
 
 export function useAuth() {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error('useAuth لازم يتستخدم  AuthProvider');
+  if (!ctx) throw new Error('useAuth يجب اتستخدام  AuthProvider');
   return ctx;
 }

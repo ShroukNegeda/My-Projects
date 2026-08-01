@@ -10,8 +10,8 @@ export async function GET(req, { params }) {
   const order = db
     .prepare(
       `SELECT orders.*, users.name AS user_name, users.email AS user_email
-       FROM orders JOIN users ON users.id = orders.user_id
-       WHERE orders.id = ?`
+      FROM orders JOIN users ON users.id = orders.user_id
+      WHERE orders.id = ?`
     )
     .get(id);
 
@@ -47,6 +47,10 @@ export async function PATCH(req, { params }) {
     }
     updates.push('status = ?');
     values.push(body.status);
+    if (body.status === 'delivered' && body.payment_status === undefined) {
+      updates.push('payment_status = ?');
+      values.push('paid');
+    }
   }
 
   if (body.payment_status !== undefined) {
@@ -66,4 +70,16 @@ export async function PATCH(req, { params }) {
 
   const order = db.prepare('SELECT * FROM orders WHERE id = ?').get(id);
   return NextResponse.json({ order });
+}
+
+export async function DELETE(req, { params }) {
+  const session = await getSession();
+  if (!session?.isAdmin) {
+    return NextResponse.json({ error: 'غير مصرح لك بالوصول' }, { status: 403 });
+  }
+
+  const { id } = await params;
+  db.prepare('DELETE FROM order_items WHERE order_id = ?').run(id);
+  db.prepare('DELETE FROM orders WHERE id = ?').run(id);
+  return NextResponse.json({ ok: true });
 }

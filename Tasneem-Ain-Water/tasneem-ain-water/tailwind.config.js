@@ -39,7 +39,7 @@ module.exports = {
       },
       animation: {
         ripple: 'ripple 14s linear infinite',
-        float: 'float 6s ease-in-out infinite',
+        float: 'float 3s ease-in-out infinite',
       },
     },
   },

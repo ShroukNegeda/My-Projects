@@ -17,6 +17,8 @@ if (!db) {
   globalThis.__salsabil_db = db;
 }
 
+try { db.exec('ALTER TABLE orders ADD COLUMN transfer_image_url TEXT'); } catch {}
+
 db.exec(`
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -45,7 +47,7 @@ db.exec(`
     user_id INTEGER NOT NULL,
     status TEXT NOT NULL DEFAULT 'pending',
     payment_status TEXT NOT NULL DEFAULT 'unpaid',
-    payment_method TEXT NOT NULL DEFAULT 'cod',
+    payment_method TEXT NOT NULL DEFAULT 'network',
     total REAL NOT NULL,
     customer_name TEXT NOT NULL,
     customer_phone TEXT NOT NULL,
@@ -54,6 +56,7 @@ db.exec(`
     address_line TEXT NOT NULL,
     notes TEXT,
     payment_note TEXT,
+    transfer_image_url TEXT,
     created_at TEXT NOT NULL DEFAULT (datetime('now')),
     FOREIGN KEY (user_id) REFERENCES users(id)
   );

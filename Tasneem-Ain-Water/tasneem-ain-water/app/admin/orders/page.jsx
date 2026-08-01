@@ -1,5 +1,7 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import db from '@/lib/db';
 import AdminShell from '@/components/AdminShell';
 
 const STATUS_LABELS = {
@@ -7,22 +9,33 @@ const STATUS_LABELS = {
   processing: 'قيد التجهيز',
   shipped: 'تم الشحن',
   delivered: 'تم التوصيل',
-  cancelled: 'ملغي',
+  cancelled: 'ملغى',
 };
 
 const PAYMENT_METHOD_LABELS = {
   cod: 'عند الاستلام',
-  bank_transfer: 'تحويل بنكي',
+  network: 'الدفع بالشبكة مع المندوب',
+  bank_transfer: 'تحويل بنكى',
 };
 
 export default function AdminOrdersPage() {
-  const orders = db
-    .prepare(
-      `SELECT orders.*, users.name AS user_name, users.email AS user_email
-      FROM orders JOIN users ON users.id = orders.user_id
-      ORDER BY orders.created_at DESC`
-    )
-    .all();
+  const [orders, setOrders] = useState([]);
+
+  async function load() {
+    const res = await fetch('/api/orders');
+    const data = await res.json();
+    setOrders(data.orders || []);
+  }
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  async function deleteOrder(id) {
+    if (!confirm('هل أنت متأكد من حذف هذا الطلب نهائياً؟ لا يمكن التراجع عن هذا الإجراء.')) return;
+    await fetch(`/api/orders/${id}`, { method: 'DELETE' });
+    load();
+  }
 
   return (
     <AdminShell title="الطلبات">
@@ -34,11 +47,12 @@ export default function AdminOrdersPage() {
               <th className="px-6 py-3 font-medium">العميل</th>
               <th className="px-6 py-3 font-medium">الجوال</th>
               <th className="px-6 py-3 font-medium">الموقع</th>
-              <th className="px-6 py-3 font-medium">الإجمالي</th>
+              <th className="px-6 py-3 font-medium">الإجمالى</th>
               <th className="px-6 py-3 font-medium">طريقة الدفع</th>
               <th className="px-6 py-3 font-medium">الدفع</th>
               <th className="px-6 py-3 font-medium">الحالة</th>
               <th className="px-6 py-3 font-medium">التاريخ</th>
+              <th className="px-6 py-3 font-medium"></th>
             </tr>
           </thead>
           <tbody>
@@ -56,15 +70,7 @@ export default function AdminOrdersPage() {
                 <td className="px-6 py-3 font-semibold">{o.total.toFixed(0)} ر.س</td>
                 <td className="px-6 py-3 text-ink-700/60">{PAYMENT_METHOD_LABELS[o.payment_method] || o.payment_method}</td>
                 <td className="px-6 py-3">
-                  <span
-                    className={`text-xs px-2.5 py-1 rounded-full font-semibold ${
-                      o.payment_status === 'paid'
-                        ? 'bg-emerald-100 text-emerald-700'
-                        : o.payment_status === 'failed'
-                        ? 'bg-red-100 text-red-700'
-                        : 'bg-amber-100 text-amber-700'
-                    }`}
-                  >
+                  <span className={`text-xs px-2.5 py-1 rounded-full font-semibold ${ o.payment_status === 'paid' ? 'bg-emerald-100 text-emerald-700' : o.payment_status === 'failed' ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700'}`}>
                     {o.payment_status}
                   </span>
                 </td>
@@ -76,10 +82,13 @@ export default function AdminOrdersPage() {
                 <td className="px-6 py-3 text-ink-700/50">
                   {new Date(o.created_at).toLocaleDateString('ar-SA')}
                 </td>
+                <td className="px-6 py-3">
+                  <button onClick={() => deleteOrder(o.id)} className="text-red-600 text-xs font-semibold">حذف</button>
+                </td>
               </tr>
             ))}
             {orders.length === 0 && (
-              <tr><td colSpan={9} className="px-6 py-8 text-center text-ink-700/40">لا توجد طلبات </td></tr>
+              <tr><td colSpan={10} className="px-6 py-8 text-center text-ink-700/40">لا توجد طلبات</td></tr>
             )}
           </tbody>
         </table>

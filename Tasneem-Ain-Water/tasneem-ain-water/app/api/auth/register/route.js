@@ -29,6 +29,6 @@ export async function POST(req) {
     return NextResponse.json({ user });
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ error: 'حصل خطأ غير متوقع، حاول مره اخرى' }, { status: 500 });
+    return NextResponse.json({ error: 'حدث خطأ غير متوقع، حاول مره اخرى' }, { status: 500 });
   }
 }

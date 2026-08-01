@@ -31,12 +31,7 @@ export default function OrderStatusUpdater({ orderId, currentStatus }) {
 
   return (
     <div className="flex items-center gap-2">
-      <select
-        value={status}
-        onChange={handleChange}
-        disabled={saving}
-        className="px-4 py-2 rounded-xl border border-water-400/25 bg-white text-sm font-semibold text-water-700"
-      >
+      <select value={status} onChange={handleChange} disabled={saving} className="px-4 py-2 rounded-xl border border-water-400/25 bg-white text-sm font-semibold text-water-700">
         {STATUSES.map(([value, label]) => (
           <option key={value} value={value}>{label}</option>
         ))}

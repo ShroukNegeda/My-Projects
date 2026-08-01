@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { ShoppingCart, Droplets, X } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 
 export default function CartPage() {
@@ -16,7 +17,7 @@ export default function CartPage() {
 
         {!hydrated ? null : items.length === 0 ? (
           <div className="text-center py-20 bg-white rounded-3xl border border-water-400/15">
-            <p className="text-5xl mb-4">🛒</p>
+            <ShoppingCart className="w-12 h-12 text-water-400 mx-auto mb-4" />
             <p className="text-ink-700/60 mb-6">السله فارغه </p>
             <Link href="/#products" className="px-6 py-3 rounded-full bg-water-600 text-white font-semibold">
               تصفح المنتجات
@@ -31,7 +32,7 @@ export default function CartPage() {
                     {item.image_url ? (
                       <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" />
                     ) : (
-                      '💧'
+                      <Droplets className="w-8 h-8 text-water-400" />
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -39,29 +40,19 @@ export default function CartPage() {
                     <p className="text-sm text-ink-700/50">{item.size_label}</p>
                   </div>
                   <div className="flex items-center gap-1 bg-laban-100 rounded-full">
-                    <button
-                      onClick={() => updateQuantity(item.product_id, item.quantity - 1)}
-                      className="w-8 h-8 rounded-full flex items-center justify-center text-water-700 hover:bg-white"
-                    >
+                    <button onClick={() => updateQuantity(item.product_id, item.quantity - 1)} className="w-8 h-8 rounded-full flex items-center justify-center text-water-700 hover:bg-white">
                       −
                     </button>
                     <span className="w-6 text-center font-semibold">{item.quantity}</span>
-                    <button
-                      onClick={() => updateQuantity(item.product_id, item.quantity + 1)}
-                      className="w-8 h-8 rounded-full flex items-center justify-center text-water-700 hover:bg-white"
-                    >
+                    <button onClick={() => updateQuantity(item.product_id, item.quantity + 1)} className="w-8 h-8 rounded-full flex items-center justify-center text-water-700 hover:bg-white">
                       +
                     </button>
                   </div>
                   <p className="w-24 text-left font-display font-bold text-water-700">
                     {(item.price * item.quantity).toFixed(0)} ر.س
                   </p>
-                  <button
-                    onClick={() => removeItem(item.product_id)}
-                    className="text-ink-700/40 hover:text-red-500 transition-colors"
-                    aria-label="حذف"
-                  >
-                    ✕
+                  <button onClick={() => removeItem(item.product_id)} className="text-ink-700/40 hover:text-red-500 transition-colors" aria-label="حذف">
+                    <X className="w-4 h-4" />
                   </button>
                 </div>
               ))}
@@ -72,10 +63,7 @@ export default function CartPage() {
               <span className="font-display text-2xl font-bold text-water-700">{totalPrice.toFixed(0)} ر.س</span>
             </div>
 
-            <Link
-              href="/checkout"
-              className="mt-6 block text-center w-full py-3.5 rounded-full bg-water-600 text-white font-semibold hover:bg-water-700 transition-colors"
-            >
+            <Link href="/checkout" className="mt-6 block text-center w-full py-3.5 rounded-full bg-water-600 text-white font-semibold hover:bg-water-700 transition-colors">
               إتمام الطلب
             </Link>
           </>

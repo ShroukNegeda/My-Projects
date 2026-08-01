@@ -10,12 +10,12 @@ export default function AboutSection() {
           <h2 className="font-display text-3xl md:text-4xl font-bold mt-2 leading-tight">
             من ينابيع المملكة،
             <br />
-            إلى كل بيت سعودي
+            إلى كل بيت سعودى
           </h2>
           <p className="mt-5 text-water-50/80 leading-relaxed">
             بدأت Tasneem Ain من إيمان بسيط: إن أنقى مياه تستحق تصل لبيتك مثل ما هي، بدون أي إضافات. مياهنا
             تُستخرج من مصادر معدنية طبيعية داخل المملكة، وتُعبأ بمعايير جودة صارمة، وتوصل لباب بيتك
-            و توفر توصيل سريعة تغطي أغلب مدن المملكة.
+            و توفر توصيل سريعة تغطى أغلب مدن المملكة.
           </p>
         </div>
 

@@ -36,6 +36,7 @@ export async function POST(req) {
       notes,
       payment_method,
       payment_note,
+      transfer_image_url,
     } = await req.json();
 
     if (!items?.length) {
@@ -45,7 +46,7 @@ export async function POST(req) {
       return NextResponse.json({ error: 'من فضلك أكمل بيانات التوصيل' }, { status: 400 });
     }
 
-    const allowedMethods = ['cod', 'bank_transfer'];
+    const allowedMethods = ['cod', 'network', 'bank_transfer'];
     const method = allowedMethods.includes(payment_method) ? payment_method : 'cod';
 
     let total = 0;
@@ -60,8 +61,8 @@ export async function POST(req) {
     const orderInfo = db
       .prepare(
         `INSERT INTO orders
-        (user_id, total, customer_name, customer_phone, city, district, address_line, notes, payment_method, payment_note)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        (user_id, total, customer_name, customer_phone, city, district, address_line, notes, payment_method, payment_note, transfer_image_url)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
       )
       .run(
         session.userId,
@@ -73,7 +74,8 @@ export async function POST(req) {
         address_line,
         notes || null,
         method,
-        method === 'bank_transfer' ? payment_note || null : null
+        method === 'bank_transfer' ? payment_note || null : null,
+        method === 'bank_transfer' ? transfer_image_url || null : null
       );
 
     const orderId = orderInfo.lastInsertRowid;

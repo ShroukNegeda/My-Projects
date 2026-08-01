@@ -9,7 +9,7 @@ const STATUS_LABELS = {
   processing: 'قيد التجهيز',
   shipped: 'تم الشحن',
   delivered: 'تم التوصيل',
-  cancelled: 'ملغي',
+  cancelled: 'ملغى',
 };
 
 const PAYMENT_LABELS = {
@@ -20,7 +20,7 @@ const PAYMENT_LABELS = {
 
 const PAYMENT_METHOD_LABELS = {
   cod: 'الدفع عند الاستلام',
-  bank_transfer: 'تحويل بنكي',
+  bank_transfer: 'تحويل بنكى',
 };
 
 export default function AccountPage() {
@@ -36,7 +36,7 @@ export default function AccountPage() {
     <>
       <Navbar />
       <main className="container-page py-16 max-w-2xl mx-auto min-h-[60vh]">
-        <h1 className="font-display text-3xl font-bold mb-8">طلباتي</h1>
+        <h1 className="font-display text-3xl font-bold mb-8">طلباتى</h1>
 
         {orders === null ? (
           <p className="text-ink-700/60">جارِ التحميل...</p>
@@ -54,11 +54,7 @@ export default function AccountPage() {
                   <span className="text-xs px-3 py-1 rounded-full bg-water-100 text-water-700 font-semibold">
                     {STATUS_LABELS[o.status] || o.status}
                   </span>
-                  <span
-                    className={`text-xs px-3 py-1 rounded-full font-semibold ${
-                      o.payment_status === 'paid' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'
-                    }`}
-                  >
+                  <span className={`text-xs px-3 py-1 rounded-full font-semibold ${ o.payment_status === 'paid' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
                     {PAYMENT_LABELS[o.payment_status] || o.payment_status}
                   </span>
                 </div>

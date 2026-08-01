@@ -3,24 +3,31 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const CartContext = createContext(null);
-const STORAGE_KEY = 'salsabil_cart';
 
-export function CartProvider({ children }) {
+function storageKey(userId) {
+  return userId ? `salsabil_cart_${userId}` : 'salsabil_cart_guest';
+}
+
+export function CartProvider({ children, userId }) {
   const [items, setItems] = useState([]);
   const [hydrated, setHydrated] = useState(false);
+  const [currentKey, setCurrentKey] = useState(() => storageKey(userId));
 
   useEffect(() => {
+    const key = storageKey(userId);
+    setCurrentKey(key);
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) setItems(JSON.parse(raw));
+      const raw = localStorage.getItem(key);
+      setItems(raw ? JSON.parse(raw) : []);
     } catch {
+      setItems([]);
     }
     setHydrated(true);
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
-    if (hydrated) localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-  }, [items, hydrated]);
+    if (hydrated) localStorage.setItem(currentKey, JSON.stringify(items));
+  }, [items, hydrated, currentKey]);
 
   function addItem(product, quantity = 1) {
     setItems((prev) => {
@@ -74,6 +81,6 @@ export function CartProvider({ children }) {
 
 export function useCart() {
   const ctx = useContext(CartContext);
-  if (!ctx) throw new Error('useCart لازم يتستخدم  CartProvider');
+  if (!ctx) throw new Error('useCart يجب اتستخدام CartProvider');
   return ctx;
 }

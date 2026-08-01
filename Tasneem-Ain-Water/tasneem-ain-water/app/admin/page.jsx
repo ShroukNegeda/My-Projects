@@ -18,7 +18,7 @@ export default function AdminDashboard() {
     .all();
 
   const stats = [
-    { label: 'إجمالي الطلبات', value: totalOrders },
+    { label: 'إجمالى الطلبات', value: totalOrders },
     { label: 'طلبات قيد الانتظار', value: pendingOrders },
     { label: 'الإيرادات المحصّلة', value: `${revenue.toFixed(0)} ر.س` },
     { label: 'المنتجات النشطة', value: totalProducts },
@@ -47,7 +47,7 @@ export default function AdminDashboard() {
               <th className="px-6 py-3 font-medium">رقم الطلب</th>
               <th className="px-6 py-3 font-medium">العميل</th>
               <th className="px-6 py-3 font-medium">المدينة</th>
-              <th className="px-6 py-3 font-medium">الإجمالي</th>
+              <th className="px-6 py-3 font-medium">الإجمالى</th>
               <th className="px-6 py-3 font-medium">الحالة</th>
             </tr>
           </thead>
