@@ -27,7 +27,7 @@ export const skills = [
   },
   {
     category: "Frameworks & Libraries",
-    items: ["React.js", "Bootstrap 5", "jQuery", "Flexbox", "CSS Grid"],
+    items: ["React.js (basic)", "Bootstrap 5", "jQuery", "Flexbox", "CSS Grid"],
   },
   {
     category: "Tools & Platforms",
@@ -38,6 +38,8 @@ export const skills = [
     items: [
       "Team Leadership",
       "Communication",
+      "Organization",
+      "Presentation",
       "Time Management",
       "Fast Learner",
       "Decision Making",
@@ -79,6 +81,7 @@ export const experience = [
 ];
 
 export const courses = [
+  { name: "Frontend", org: "ITI", date: "Aug 2026" },
   { name: "AI for you", org: "Oracle University", date: "Aug 2026" },
   { name: "Introduction to Cyber Security", org: "Cisco", date: "Jul 2026" },
   { name: "Frontend", org: "Elevvo", date: "Mar 2026" },

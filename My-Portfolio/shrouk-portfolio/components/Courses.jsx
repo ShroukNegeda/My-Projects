@@ -15,8 +15,8 @@ export default function Courses() {
                 <Award size={18} /> Certifications
               </h3>
               <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-4">
-                {courses.map((c) => (
-                  <li key={c.name} className="border-b border-white/5 pb-3">
+                {courses.map((c, index) => (
+                  <li key={`${c.name}-${c.org}`} className="border-b border-white/5 pb-3">
                     <p className="text-sand text-sm">{c.name}</p>
                     <p className="text-mist text-xs mt-1">
                       {c.org} · {c.date}
@@ -33,8 +33,8 @@ export default function Courses() {
                 <Calendar size={18} /> Events
               </h3>
               <ul className="space-y-4">
-                {events.map((e) => (
-                  <li key={e.name} className="border-b border-white/5 pb-3">
+                {events.map((e, index) => (
+                  <li key={`${e.name}-${index}`} className="border-b border-white/5 pb-3">
                     <p className="text-sand text-sm">{e.name}</p>
                     <p className="text-mist text-xs mt-1">
                       {e.org} · {e.date}

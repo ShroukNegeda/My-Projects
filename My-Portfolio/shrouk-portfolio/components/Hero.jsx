@@ -53,7 +53,7 @@ export default function Hero() {
             <a href="#contact" className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm text-sand hover:border-dawn-gold/60 hover:text-dawn-gold transition focus-ring">
               Get in touch
             </a>
-            <a href="https://drive.google.com/file/d/17Kz16PeINgDSltGOVwIfSaazVk6qYuHG/view?usp=sharing" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm text-sand hover:border-dawn-gold/60 hover:text-dawn-gold transition focus-ring">
+            <a href="https://drive.google.com/file/d/1tYEcMEFVv6JPFeyHkEG9FIljQp_VD2s3/view?usp=sharing" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm text-sand hover:border-dawn-gold/60 hover:text-dawn-gold transition focus-ring">
               View CV
             </a>
           </motion.div>
