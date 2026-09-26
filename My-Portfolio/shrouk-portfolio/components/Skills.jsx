@@ -9,7 +9,7 @@ export default function Skills() {
   return (
     <section id="skills" className="relative py-28 sm:py-36 bg-night-100/40">
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
-        <SectionHeading eyebrow="Skills" title="What I actually reach for" description="A working toolkit built through two frontend training programs, 15+ shipped projects, and a habit of finishing what I start."/>
+        <SectionHeading eyebrow="Skills" title="What I actually reach for" description="A working toolkit built through 15+ shipped projects and a habit of finishing what I start."/>
 
         <div className="mt-14 grid sm:grid-cols-2 gap-6">
           {skills.map((group, i) => (

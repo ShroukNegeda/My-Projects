@@ -11,7 +11,7 @@ export const profile = {
   vercel: "https://vercel.com/shrouknegedas-projects",
   blurb:
     "I build clean, fast, accessible interfaces - then spend the second half of every day making sure they actually feel good to use.",
-  bio: "Motivated frontend developer and Systems & Management Information student at El Shorouk Academy. I've completed two intensive frontend training programs and shipped 15+ projects in HTML5, CSS3, JavaScript and SCSS. Outside the editor, I've spent three years in progressive leadership roles at IEEE - most recently as Head of HR - running recruitment, onboarding and team management for a 20+ person student branch.",
+  bio: "Motivated frontend developer with 15+ projects in HTML5, CSS3, JavaScript and SCSS. Outside the editor, I've spent three years in progressive leadership roles in student activities through IEEE - most recently as Head of HR - leading recruitment, onboarding and team management for a 20+ person student branch.",
 };
 
 export const education = {

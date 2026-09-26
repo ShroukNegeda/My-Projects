@@ -1,7 +1,7 @@
-import { GraduationCap, MapPin, Sparkles } from "lucide-react";
+import { BriefcaseBusiness, Languages, MapPin, Sparkles } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import FadeIn from "./FadeIn";
-import { profile, education } from "@/lib/data";
+import { profile } from "@/lib/data";
 
 const facts = [
   {
@@ -10,14 +10,19 @@ const facts = [
     value: profile.location,
   },
   {
-    icon: GraduationCap,
-    label: "Studying",
-    value: `${education.degree}, ${education.period}`,
+    icon: BriefcaseBusiness,
+    label: "Role",
+    value: "Frontend Developer",
+  },
+  {
+    icon: Languages,
+    label: "Languages",
+    value: "Arabic (Native), English (B1)",
   },
   {
     icon: Sparkles,
     label: "Focus",
-    value: "React interfaces, REST APIs, design systems",
+    value: "React interfaces, REST APIs, Design systems",
   },
 ];
 

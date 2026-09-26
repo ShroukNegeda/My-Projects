@@ -4,18 +4,12 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Logo from "./Logo";
-
-const links = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#projects", label: "Projects" },
-  { href: "#experience", label: "Experience" },
-  { href: "#contact", label: "Contact" },
-];
+import { navigationLinks, useSectionProgress } from "@/lib/section-navigation";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { activeHref } = useSectionProgress(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -35,10 +29,23 @@ export default function Navbar() {
         </a>
 
         <ul className="hidden md:flex items-center gap-9 font-body text-sm text-mist">
-          {links.map((l) => (
+          {navigationLinks.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="hover:text-sand transition-colors focus-ring">
+              <a
+                href={l.href}
+                aria-current={activeHref === l.href ? "location" : undefined}
+                className={`relative transition-colors focus-ring ${
+                  activeHref === l.href ? "text-sand" : "hover:text-sand"
+                }`}
+              >
                 {l.label}
+                {activeHref === l.href && (
+                  <motion.span
+                    layoutId="active-nav-dot"
+                    transition={{ type: "spring", stiffness: 500, damping: 32 }}
+                    className="absolute -bottom-3 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-dawn-gold shadow-[0_0_8px_rgba(255,193,94,0.8)]"
+                  />
+                )}
               </a>
             </li>
           ))}
@@ -57,9 +64,18 @@ export default function Navbar() {
         {open && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }} className="md:hidden overflow-hidden bg-night border-b border-white/5">
             <ul className="flex flex-col gap-1 px-6 py-4">
-              {links.map((l) => (
+              {navigationLinks.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} onClick={() => setOpen(false)} className="block py-2 text-mist hover:text-sand transition-colors">
+                  <a
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={activeHref === l.href ? "location" : undefined}
+                    className={`block py-2 transition-colors ${
+                      activeHref === l.href
+                        ? "text-dawn-gold"
+                        : "text-mist hover:text-sand"
+                    }`}
+                  >
                     {l.label}
                   </a>
                 </li>
