@@ -1,27 +1,8 @@
-import { Fraunces, Manrope, JetBrains_Mono } from "next/font/google";
+import "@fontsource-variable/fraunces/wght.css";
+import "@fontsource-variable/fraunces/wght-italic.css";
+import "@fontsource-variable/manrope/wght.css";
+import "@fontsource-variable/jetbrains-mono/wght.css";
 import "./globals.css";
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
-  weight: ["400", "500", "600", "700", "900"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-manrope",
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const jetbrains = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains",
-  weight: ["400", "500"],
-  display: "swap",
-});
 
 export const metadata = {
   title: "Shrouk Negeda — Frontend Developer",
@@ -44,7 +25,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${manrope.variable} ${jetbrains.variable}`}>
+    <html lang="en">
       <body
         className="font-body antialiased bg-night text-sand overflow-x-hidden"
         suppressHydrationWarning
